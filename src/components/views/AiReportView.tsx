@@ -385,19 +385,22 @@ export const AiReportView: React.FC<AiReportViewProps> = ({ context, spatialAnal
             </div>
             
             <div className="p-4 border-b border-slate-200 bg-slate-50 flex gap-2 flex-wrap">
-              <button 
+              <button
+                data-usage-action="report-all"
                 onClick={handleSelectAll}
                 className="px-3 py-1.5 bg-white border border-slate-300 text-slate-700 text-sm font-medium rounded hover:bg-slate-50"
               >
                 전체 선택
               </button>
-              <button 
+              <button
+                data-usage-action="report-none"
                 onClick={handleDeselectAll}
                 className="px-3 py-1.5 bg-white border border-slate-300 text-slate-700 text-sm font-medium rounded hover:bg-slate-50"
               >
                 전체 해제
               </button>
-              <button 
+              <button
+                data-usage-action="report-rec"
                 onClick={handleSelectRecommended}
                 className="px-3 py-1.5 bg-indigo-50 border border-indigo-200 text-indigo-700 text-sm font-medium rounded hover:bg-indigo-100"
               >
@@ -412,6 +415,7 @@ export const AiReportView: React.FC<AiReportViewProps> = ({ context, spatialAnal
                 return (
                   <label key={id} className="flex items-center gap-3 p-2 hover:bg-slate-50 rounded cursor-pointer border border-transparent hover:border-slate-200">
                     <input 
+                      data-usage-action={'report-' + id}
                       type="checkbox" 
                       className="w-5 h-5 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
                       checked={selectedDatasetIds.has(id)}
@@ -442,12 +446,14 @@ export const AiReportView: React.FC<AiReportViewProps> = ({ context, spatialAnal
               </div>
               <div className="flex gap-3">
                 <button
+                  data-usage-action="report-cancel"
                   onClick={() => { setIsModalOpen(false); setPendingExportAction(null); }}
                   className="px-4 py-2 bg-white border border-slate-300 text-slate-700 font-bold rounded-lg hover:bg-slate-50"
                 >
                   취소
                 </button>
                 <button
+                  data-usage-action="report-save"
                   onClick={handleConfirmExport}
                   disabled={selectedDatasetIds.size === 0}
                   className="px-6 py-2 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -481,6 +487,7 @@ export const AiReportView: React.FC<AiReportViewProps> = ({ context, spatialAnal
                 </select>
               </div>
               <button
+                data-usage-action="report-zip"
                 onClick={() => handleOpenModal('zip')}
                 disabled={isExporting || exportTarget !== null}
                 className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white text-sm font-bold rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-50"
@@ -489,6 +496,7 @@ export const AiReportView: React.FC<AiReportViewProps> = ({ context, spatialAnal
                 {exportTarget === 'zip' ? '이미지 생성중...' : '지도 이미지 다운로드'}
               </button>
               <button
+                data-usage-action="report-pdf"
                 onClick={() => handleOpenModal('pdf')}
                 disabled={isExporting || exportTarget !== null}
                 className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-bold rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50"

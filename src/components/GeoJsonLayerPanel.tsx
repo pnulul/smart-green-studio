@@ -145,6 +145,7 @@ export const GeoJsonLayerPanel: React.FC<GeoJsonLayerPanelProps> = ({
         <div className="flex items-center gap-1">
           {onClose && (
             <button
+              data-usage-action="layer-close"
               type="button"
               onClick={onClose}
               className="p-1 rounded-lg text-[var(--text-3)] hover:text-[var(--text-1)] hover:bg-[var(--surface-1)] transition-colors"
@@ -158,6 +159,7 @@ export const GeoJsonLayerPanel: React.FC<GeoJsonLayerPanelProps> = ({
       {/* Tabs */}
       <div className="flex items-center border-b border-[var(--border-hair)] bg-[var(--bg-panel)] px-2 pt-1 gap-1">
         <button
+          data-usage-action="layers-tab"
           type="button"
           onClick={() => setActiveTab('layers')}
           className={`px-3 py-1.5 font-medium rounded-t-lg transition-colors text-xs flex items-center gap-1.5 ${
@@ -171,6 +173,7 @@ export const GeoJsonLayerPanel: React.FC<GeoJsonLayerPanelProps> = ({
         </button>
 
         <button
+          data-usage-action="upload-tab"
           type="button"
           onClick={() => setActiveTab('upload')}
           className={`px-3 py-1.5 font-medium rounded-t-lg transition-colors text-xs flex items-center gap-1.5 ${
@@ -184,6 +187,7 @@ export const GeoJsonLayerPanel: React.FC<GeoJsonLayerPanelProps> = ({
         </button>
 
         <button
+          data-usage-action="legend-tab"
           type="button"
           onClick={() => setActiveTab('legend')}
           className={`px-3 py-1.5 font-medium rounded-t-lg transition-colors text-xs flex items-center gap-1.5 ${
@@ -214,6 +218,7 @@ export const GeoJsonLayerPanel: React.FC<GeoJsonLayerPanelProps> = ({
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <button
+                      data-usage-action="layer-toggle"
                       type="button"
                       onClick={() => onToggleLayer(layer.key)}
                       className={`w-5 h-5 rounded-md flex items-center justify-center transition-colors ${
@@ -274,6 +279,7 @@ export const GeoJsonLayerPanel: React.FC<GeoJsonLayerPanelProps> = ({
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 truncate">
                         <button
+                          data-usage-action="layer-toggle"
                           type="button"
                           onClick={() => onToggleCustomLayer(cLayer.id)}
                           className={`w-5 h-5 rounded-md flex items-center justify-center transition-colors ${
@@ -292,6 +298,7 @@ export const GeoJsonLayerPanel: React.FC<GeoJsonLayerPanelProps> = ({
                           {cLayer.featureCount} Features
                         </span>
                         <button
+                          data-usage-action="layer-remove"
                           type="button"
                           onClick={() => onRemoveCustomLayer(cLayer.id)}
                           className="p-1 text-[var(--text-3)] hover:text-[var(--danger)] transition-colors"
@@ -338,6 +345,7 @@ export const GeoJsonLayerPanel: React.FC<GeoJsonLayerPanelProps> = ({
 
               <input
                 ref={fileInputRef}
+                data-usage-action="layer-upload"
                 type="file"
                 accept=".geojson,.json"
                 onChange={handleFileUpload}
@@ -365,6 +373,7 @@ export const GeoJsonLayerPanel: React.FC<GeoJsonLayerPanelProps> = ({
                 </div>
               </div>
               <button
+                data-usage-action="layer-sample"
                 type="button"
                 onClick={handleLoadSampleStreamGeoJson}
                 className="px-2.5 py-1 bg-[var(--surface-2)] hover:bg-[var(--surface-1)] border border-[var(--border-hair)] text-[var(--accent)] rounded-lg font-medium text-[11px] transition-colors"

@@ -26,6 +26,7 @@ import {
 } from './services/greenInfraAlgorithm';
 import { buildAnalysisContext } from './services/analysisContextBuilder';
 import { apiUrl } from './services/resourceService';
+import { setUsageScreen } from './services/usageTelemetry';
 import {
   SiteAnalysisData,
   RadiusOption,
@@ -56,6 +57,10 @@ export default function App() {
 
   // Landscape Design Process Active Stage
   const [activeStage, setActiveStage] = useState<DesignStageKey>('setup');
+
+  useEffect(() => {
+    setUsageScreen(authSession?.isLoggedIn ? (authSession.studentId === 'demo' ? activeStage : null) : 'entry');
+  }, [activeStage, authSession]);
 
   useEffect(() => {
     if (authSession?.studentId) {

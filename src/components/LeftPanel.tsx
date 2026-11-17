@@ -216,6 +216,7 @@ export const LeftPanel: React.FC<LeftPanelProps> = ({
         </div>
         {onOpenApiSettings && (
           <button
+            data-usage-action="header-api-settings-btn"
             type="button"
             onClick={onOpenApiSettings}
             className="p-1.5 rounded-xl bg-[var(--surface-1)] hover:bg-[var(--surface-2)] text-[var(--text-2)] hover:text-[var(--accent)] border border-[var(--border-hair)] transition-colors flex items-center gap-1 text-[11px] font-semibold"
@@ -281,6 +282,7 @@ export const LeftPanel: React.FC<LeftPanelProps> = ({
                 />
               </div>
               <button
+                data-usage-action="search-site"
                 type="submit"
                 disabled={isSearching || !searchInput.trim()}
                 className="px-3 h-9 bg-[var(--surface-2)] hover:bg-[var(--surface-3)] rounded-xl text-xs font-bold border border-[var(--border-hair)] transition-colors flex items-center gap-1 disabled:opacity-50"
@@ -307,6 +309,7 @@ export const LeftPanel: React.FC<LeftPanelProps> = ({
           {/* Pick on Map Toggle */}
           {onTogglePickMode && (
             <button
+              data-usage-action="map-pick-mode"
               type="button"
               onClick={() => onTogglePickMode(!isPickMode)}
               className={`w-full py-2 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-2 ${
@@ -348,6 +351,7 @@ export const LeftPanel: React.FC<LeftPanelProps> = ({
               </div>
             </div>
             <button
+              data-usage-action="apply-coords"
               type="button"
               onClick={handleApplyManualCoords}
               className="w-full py-1 bg-[var(--surface-2)] hover:bg-[var(--surface-3)] text-xs font-medium text-[var(--text-1)] rounded-lg border border-[var(--border-hair)] transition-colors"
@@ -386,6 +390,7 @@ export const LeftPanel: React.FC<LeftPanelProps> = ({
             <label className="block text-[11px] font-medium text-[var(--text-3)] mb-1.5">버퍼 형태 선택</label>
             <div className="grid grid-cols-2 gap-1.5">
               <button
+                data-usage-action="circle"
                 type="button"
                 onClick={() => setBufferShape && setBufferShape('circle')}
                 className={`py-1.5 px-2 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 border transition-colors ${
@@ -399,6 +404,7 @@ export const LeftPanel: React.FC<LeftPanelProps> = ({
               </button>
 
               <button
+                data-usage-action="rectangle"
                 type="button"
                 onClick={() => setBufferShape && setBufferShape('rectangle')}
                 className={`py-1.5 px-2 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 border transition-colors ${
@@ -478,6 +484,7 @@ export const LeftPanel: React.FC<LeftPanelProps> = ({
             {historyList.length > 0 ? (
               historyList.map((item) => (
                 <button
+                  data-usage-action="history-load"
                   key={item.id}
                   type="button"
                   onClick={() => onLoadHistory(item)}

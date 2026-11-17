@@ -3,6 +3,7 @@ import { ArrowRight, GraduationCap, Leaf, Lock } from 'lucide-react';
 import { StudentAuthSession } from '../types';
 import { PNU_COURSES } from '../config/courses';
 import { apiUrl } from '../services/resourceService';
+import { UsageSettings } from './UsageSettings';
 
 export { PNU_COURSES } from '../config/courses';
 
@@ -51,7 +52,7 @@ export const StudentAuthGate: React.FC<{ onLoginSuccess: (session: StudentAuthSe
           <GraduationCap className="w-8 h-8 text-[var(--accent)] mb-4" />
           <h2 className="text-2xl font-bold mb-3">스튜디오 시작하기</h2>
           <p className="text-sm text-[var(--text-2)] mb-7 leading-6">대상지를 선택하고 공간분석을 실행한 뒤 결과를 비교하고 해석하세요.</p>
-          {config.demo && <button onClick={() => enter({ isLoggedIn: true, studentName: '체험 사용자', studentId: 'demo', courseName: 'Smart Green Studio 공개 체험', courseCode: 'DEMO', authTime: new Date().toISOString() })} className="w-full flex items-center justify-between bg-[var(--accent)] text-[#080B0F] font-bold p-4 rounded-xl">로그인 없이 체험하기 <ArrowRight className="w-5 h-5" /></button>}
+          {config.demo && <button data-usage-action="demo" onClick={() => enter({ isLoggedIn: true, studentName: '체험 사용자', studentId: 'demo', courseName: 'Smart Green Studio 공개 체험', courseCode: 'DEMO', authTime: new Date().toISOString() })} className="w-full flex items-center justify-between bg-[var(--accent)] text-[#080B0F] font-bold p-4 rounded-xl">로그인 없이 체험하기 <ArrowRight className="w-5 h-5" /></button>}
           {config.courseLogin && <details className="mt-6 border-t border-[var(--border-hair)] pt-5">
             <summary className="cursor-pointer flex gap-2 items-center text-sm font-semibold"><Lock className="w-4 h-4" /> 수강생 로그인</summary>
             <form onSubmit={login} className="mt-4 space-y-3">
@@ -64,7 +65,8 @@ export const StudentAuthGate: React.FC<{ onLoginSuccess: (session: StudentAuthSe
             </form>
           </details>}
           {!config.demo && !config.courseLogin && <p>운영자에게 접속 설정을 확인해 주세요.</p>}
-          <a href="https://pnulul.github.io/vr/" target="_blank" rel="noopener noreferrer" className="mt-6 text-sm text-[var(--accent)] underline underline-offset-4">수목 관리 VR 실습 바로가기 ↗</a>
+          <a data-usage-action="vr" href="https://pnulul.github.io/vr/" target="_blank" rel="noopener noreferrer" className="mt-6 text-sm text-[var(--accent)] underline underline-offset-4">수목 관리 VR 실습 바로가기 ↗</a>
+          <UsageSettings />
         </section>
       </div>
     </main>

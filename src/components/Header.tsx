@@ -12,6 +12,7 @@ import {
   Microscope,
 } from 'lucide-react';
 import { LandscapeDesignStage, StudentAuthSession } from '../types';
+import { UsageSettings } from './UsageSettings';
 
 export type DesignStageKey = LandscapeDesignStage;
 
@@ -70,7 +71,8 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Right: Student Badge + Actions */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <a href="https://pnulul.github.io/vr/" target="_blank" rel="noopener noreferrer" className="text-xs px-3 py-2 border border-[var(--border-hair)] rounded-xl text-[var(--accent)]">VR 실습 ↗</a>
+          {session?.studentId === 'demo' && <UsageSettings compact />}
+          <a data-usage-action="vr" href="https://pnulul.github.io/vr/" target="_blank" rel="noopener noreferrer" className="text-xs px-3 py-2 border border-[var(--border-hair)] rounded-xl text-[var(--accent)]">VR 실습 ↗</a>
           {/* Student session profile pill */}
           {session && (
             <button

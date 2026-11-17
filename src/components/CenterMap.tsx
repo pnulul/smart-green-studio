@@ -821,6 +821,7 @@ export const CenterMap: React.FC<CenterMapProps> = ({
               <span className="font-bold text-xs text-[var(--text-1)]">OSM 시설 & POI 분석 인벤토리</span>
             </div>
             <button
+              data-usage-action="poi-close"
               type="button"
               onClick={() => setShowPoiDrawer(false)}
               className="text-[var(--text-3)] hover:text-[var(--text-1)] p-1 rounded-lg hover:bg-[var(--surface-1)] transition-colors"
@@ -833,6 +834,7 @@ export const CenterMap: React.FC<CenterMapProps> = ({
           <div className="p-2 bg-[var(--bg-panel)] border-b border-[var(--border-hair)] flex items-center gap-1 overflow-x-auto custom-scrollbar">
             {['ALL', '대중교통', '식생·공원', '교육·공공', '상업·생활'].map((cat) => (
               <button
+                data-usage-action="poi-filter"
                 key={cat}
                 type="button"
                 onClick={() => setSelectedPoiCategory(cat)}
@@ -852,6 +854,7 @@ export const CenterMap: React.FC<CenterMapProps> = ({
             {filteredPois.length > 0 ? (
               filteredPois.map((p, idx) => (
                 <button
+                  data-usage-action="poi-select"
                   key={`${p.name}-${idx}`}
                   type="button"
                   onClick={() => handleFlyToPoi(p.lat, p.lng, p.name)}
@@ -921,6 +924,7 @@ export const CenterMap: React.FC<CenterMapProps> = ({
         </span>
         {onRunAnalyze && (
           <button
+            data-usage-action="run-analysis-main-btn"
             type="button"
             onClick={onRunAnalyze}
             disabled={isLoading}

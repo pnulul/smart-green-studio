@@ -808,7 +808,8 @@ export const AnalysisTabsView: React.FC<AnalysisTabsViewProps> = ({ context, ana
               </div>
 
               <div className="flex justify-center pt-4">
-                <button 
+                <button
+                  data-usage-action="cancel-analysis"
                   onClick={cancelPipeline}
                   className="px-6 py-2 rounded-full border border-[var(--border-hair)] text-[var(--text-2)] hover:text-red-400 hover:border-red-400/30 transition-colors text-sm"
                 >
@@ -818,7 +819,8 @@ export const AnalysisTabsView: React.FC<AnalysisTabsViewProps> = ({ context, ana
             </div>
           ) : (
             <div className="flex justify-center">
-              <button 
+              <button
+                data-usage-action="run-analysis-main-btn"
                 onClick={runAnalysisPipeline}
                 className="btn-primary flex items-center gap-2 px-8 py-3 text-base rounded-full shadow-lg hover:shadow-xl transition-all"
               >
@@ -872,7 +874,8 @@ export const AnalysisTabsView: React.FC<AnalysisTabsViewProps> = ({ context, ana
             <span className="text-xs text-[var(--text-2)]">
               {successCount}개 완료 {errorCount > 0 && <span className="text-red-400">({errorCount}개 실패)</span>}
             </span>
-            <button 
+            <button
+              data-usage-action="all-data"
               onClick={handleDownloadAllGeoJson}
               className="flex items-center gap-1.5 text-xs font-bold text-[var(--accent)] bg-[var(--accent)]/10 px-3 py-1.5 rounded-full border border-[var(--accent)]/20 hover:bg-[var(--accent)]/20 transition-colors"
             >
@@ -928,6 +931,7 @@ export const AnalysisTabsView: React.FC<AnalysisTabsViewProps> = ({ context, ana
       <div className="flex border-b border-[var(--border-hair)] px-4 pt-2 bg-[var(--surface-1)] shrink-0 overflow-x-auto">
         {tabs.map((tab) => (
           <button
+            data-usage-action={'tab-' + tab}
             key={tab}
             onClick={() => handleTabChange(tab)}
             className={`px-4 py-2 font-medium text-sm transition-colors border-b-2 whitespace-nowrap ${
@@ -955,6 +959,7 @@ export const AnalysisTabsView: React.FC<AnalysisTabsViewProps> = ({ context, ana
 
               return (
                 <button
+                  data-usage-action={'dataset-' + folder}
                   key={folder}
                   onClick={() => setActiveDatasetFolder(folder)}
                   className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors border flex items-center gap-1.5 ${
@@ -991,7 +996,8 @@ export const AnalysisTabsView: React.FC<AnalysisTabsViewProps> = ({ context, ana
               onRendered={() => setIsRenderedOnMap(true)}
             />
             {((clippedGeoJson || currentRasterPreview) && !loadError) && (
-              <button 
+              <button
+                data-usage-action="single-data"
                 onClick={handleDownloadSingleGeoJson}
                 className="absolute top-4 right-4 z-[400] bg-[var(--surface-1)] border border-[var(--border-hair)] shadow-md rounded-full px-4 py-2 text-xs font-bold flex items-center gap-2 hover:bg-[var(--surface-2)] transition-colors text-[var(--text-1)]"
               >

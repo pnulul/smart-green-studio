@@ -70,15 +70,15 @@ export const AiResearchLabView: React.FC<Props> = ({ session, currentSite, spati
           {!count && <p className="text-xs text-[var(--warn)] mt-3">공간분석 탭에서 분석을 먼저 실행하면 실제 산출 결과를 대화에 활용합니다.</p>}
         </div>
         <details open={!serverReady} className="p-4 border border-[var(--border-hair)] bg-[var(--surface-1)] rounded-xl">
-          <summary className="text-sm font-semibold cursor-pointer"><KeyRound className="inline w-4 h-4 mr-2" />{serverReady ? '수업용 AI 연결됨 / 개인 키 설정' : 'AI 연결 설정'}</summary>
+          <summary data-usage-action="ai-setup" className="text-sm font-semibold cursor-pointer"><KeyRound className="inline w-4 h-4 mr-2" />{serverReady ? '수업용 AI 연결됨 / 개인 키 설정' : 'AI 연결 설정'}</summary>
           <div className="mt-4 space-y-3">
             <label className="text-xs block">Gemini API 키<input type="password" autoComplete="off" value={apiKey} onChange={e => setApiKey(e.target.value)} placeholder="Google AI Studio에서 발급한 키" className="block mt-1 w-full bg-[var(--surface-2)] p-3 rounded-lg" /></label>
             <label className="text-xs block">모델<input value={model} onChange={e => setModel(e.target.value)} className="block mt-1 w-full bg-[var(--surface-2)] p-3 rounded-lg" /></label>
             <p className="text-xs text-[var(--text-3)] leading-5">개인 키는 이 탭의 메모리에서만 사용하며 저장하지 않습니다. 질문과 분석 요약은 Google Gemini로 전송됩니다. API 사용 요금과 한도는 해당 키의 계정에 적용됩니다.</p>
-            <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" className="text-xs text-[var(--accent)] underline">Google AI Studio에서 키 발급 ↗</a>
+            <a data-usage-action="ai-key-link" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" className="text-xs text-[var(--accent)] underline">Google AI Studio에서 키 발급 ↗</a>
           </div>
         </details>
-        <div className="flex flex-wrap gap-2">{QUESTIONS.map(q => <button key={q} onClick={() => setInput(q)} className="text-xs text-[var(--text-2)] p-2 rounded-lg border border-[var(--border-hair)] hover:text-[var(--accent)]">{q}</button>)}</div>
+        <div className="flex flex-wrap gap-2">{QUESTIONS.map(q => <button data-usage-action="ai-prompt" key={q} onClick={() => setInput(q)} className="text-xs text-[var(--text-2)] p-2 rounded-lg border border-[var(--border-hair)] hover:text-[var(--accent)]">{q}</button>)}</div>
         {!messages.length && <p className="text-sm text-[var(--text-3)] leading-7 py-5">분석된 수치와 공간적 특성에 관해 질문하세요.<br />AI는 해석과 대안 검토를 돕고, 최종 계획은 사용자가 결정합니다.</p>}
         {messages.map(msg => <div key={msg.id} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
           <div className="w-8 h-8 rounded-full bg-[var(--surface-2)] flex items-center justify-center shrink-0">{msg.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4 text-[var(--accent)]" />}</div>
@@ -88,9 +88,9 @@ export const AiResearchLabView: React.FC<Props> = ({ session, currentSite, spati
         {error && <p role="alert" className="text-sm text-red-400 p-3 border border-red-400/30 rounded-xl">{error}</p>}
         <div ref={end} />
       </div>
-      <form onSubmit={e => { e.preventDefault(); void send(); }} className="p-4 border-t border-[var(--border-hair)] flex gap-2 bg-[var(--surface-1)]">
-        <textarea aria-label="AI 질문" value={input} maxLength={4000} onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); void send(); } }} placeholder="분석 결과에 관해 질문하세요" className="flex-1 min-h-14 max-h-32 bg-[var(--surface-2)] rounded-xl p-3 text-sm resize-y" />
-        <button type="submit" aria-label="질문 보내기" disabled={busy || !input.trim()} className="w-14 bg-[var(--accent)] rounded-xl text-[#080B0F] flex items-center justify-center disabled:opacity-40"><Send className="w-5 h-5" /></button>
+      <form data-usage-submit="ai-send" onSubmit={e => { e.preventDefault(); void send(); }} className="p-4 border-t border-[var(--border-hair)] flex gap-2 bg-[var(--surface-1)]">
+        <textarea aria-label="AI 질문" value={input} maxLength={4000} onChange={e => setInput(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); e.currentTarget.form?.requestSubmit(); } }} placeholder="분석 결과에 관해 질문하세요" className="flex-1 min-h-14 max-h-32 bg-[var(--surface-2)] rounded-xl p-3 text-sm resize-y" />
+        <button data-usage-action="ai-send" type="submit" aria-label="질문 보내기" disabled={busy || !input.trim()} className="w-14 bg-[var(--accent)] rounded-xl text-[#080B0F] flex items-center justify-center disabled:opacity-40"><Send className="w-5 h-5" /></button>
       </form>
     </div>
   );

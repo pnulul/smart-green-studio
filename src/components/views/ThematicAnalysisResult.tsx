@@ -168,6 +168,7 @@ export const ThematicAnalysisResult: React.FC<ThematicAnalysisResultProps> = ({
             {/* Secondary metric toggle (e.g. building count vs area) */}
             {secondaryDistribution && (
               <button
+                data-usage-action="chart-metric"
                 onClick={() => setIsSecondaryMetric(!isSecondaryMetric)}
                 className="px-2.5 py-1 text-xs rounded border border-[var(--border-hair)] bg-[var(--surface-2)] text-[var(--text-2)] hover:text-[var(--text-1)] transition-colors"
               >
@@ -179,6 +180,7 @@ export const ThematicAnalysisResult: React.FC<ThematicAnalysisResultProps> = ({
             {canShowPie && (
               <div className="flex rounded bg-[var(--surface-2)] p-0.5 border border-[var(--border-hair)]">
                 <button
+                  data-usage-action="chart-bar"
                   onClick={() => setChartType('bar')}
                   className={`p-1 rounded text-xs flex items-center gap-1 ${
                     chartType === 'bar' ? 'bg-[var(--accent)] text-[#080B0F] font-bold' : 'text-[var(--text-2)]'
@@ -188,6 +190,7 @@ export const ThematicAnalysisResult: React.FC<ThematicAnalysisResultProps> = ({
                   <BarChart3 className="w-3.5 h-3.5" />
                 </button>
                 <button
+                  data-usage-action="chart-pie"
                   onClick={() => setChartType('pie')}
                   className={`p-1 rounded text-xs flex items-center gap-1 ${
                     chartType === 'pie' ? 'bg-[var(--accent)] text-[#080B0F] font-bold' : 'text-[var(--text-2)]'
@@ -296,6 +299,7 @@ export const ThematicAnalysisResult: React.FC<ThematicAnalysisResultProps> = ({
           </div>
 
           <button
+            data-usage-action="chart-sort"
             onClick={() => setSortBy(sortBy === 'ratio' ? 'default' : 'ratio')}
             className="flex items-center gap-1 text-xs text-[var(--text-2)] hover:text-[var(--text-1)] px-2 py-0.5 rounded bg-[var(--surface-2)] border border-[var(--border-hair)]"
           >

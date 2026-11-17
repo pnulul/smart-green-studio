@@ -106,7 +106,8 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
             </div>
             
             {(!googleSearchApiKey || !googleSearchEngineId) && (
-              <button 
+              <button
+                data-usage-action="header-api-settings-btn"
                 onClick={onOpenApiSettings}
                 className="flex items-center gap-2 px-3 py-1.5 bg-[var(--surface-2)] hover:bg-[var(--surface-3)] border border-[var(--border-hair)] rounded-lg text-xs font-medium text-[var(--warn)] transition-colors"
               >
@@ -132,7 +133,8 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
               placeholder="검색어 입력..."
               className="block w-full pl-10 pr-16 py-3 border border-[var(--border-hair)] rounded-xl bg-[var(--surface-1)] text-[var(--text-1)] text-sm placeholder-[var(--text-3)] focus:outline-none focus:border-[var(--accent-dim)] transition-colors"
             />
-            <button 
+            <button
+              data-usage-action="news-search"
               onClick={() => handleSearch()}
               disabled={isSearching}
               className="absolute inset-y-1.5 right-1.5 px-3 bg-[var(--surface-2)] hover:bg-[var(--surface-3)] text-[var(--text-1)] text-xs font-bold rounded-lg border border-[var(--border-hair)] transition-colors flex items-center justify-center disabled:opacity-50"
@@ -144,6 +146,7 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
           <div className="flex flex-wrap gap-2">
             {RECOMMENDED_KEYWORDS.map(keyword => (
               <button
+                data-usage-action="news-keyword"
                 key={keyword}
                 onClick={() => handleKeywordClick(keyword)}
                 className="px-3 py-1.5 rounded-full bg-[var(--surface-1)] hover:bg-[var(--surface-2)] border border-[var(--border-hair)] text-[11px] text-[var(--text-2)] hover:text-[var(--accent)] transition-colors flex items-center gap-1"
@@ -186,7 +189,8 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
           {!isSearching && searchResults.map((item, idx) => {
             const thumbnail = item.pagemap?.cse_thumbnail?.[0]?.src;
             return (
-              <a 
+              <a
+                data-usage-action="news-open"
                 key={idx} 
                 href={item.link} 
                 target="_blank" 

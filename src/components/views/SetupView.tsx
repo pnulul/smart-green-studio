@@ -183,6 +183,7 @@ export const SetupView: React.FC<SetupViewProps> = ({
           </p>
         </div>
         <button
+          data-usage-action="header-api-settings-btn"
           type="button"
           onClick={onOpenApiSettings}
           className="p-1.5 rounded-xl bg-[var(--surface-1)] hover:bg-[var(--surface-2)] text-[var(--text-2)] hover:text-[var(--accent)] border border-[var(--border-hair)] transition-colors flex items-center gap-1 text-[11px] font-semibold"
@@ -203,6 +204,7 @@ export const SetupView: React.FC<SetupViewProps> = ({
             <span>주소 · 지명 검색</span>
           </label>
           <button
+            data-usage-action="gps-location-btn"
             type="button"
             onClick={handleGetCurrentLocation}
             className="text-[10px] text-[var(--accent)] hover:underline flex items-center gap-1 font-medium bg-[var(--surface-1)] hover:bg-[var(--surface-2)] px-2 py-0.5 rounded-lg border border-[var(--border-hair)] transition-colors"
@@ -224,6 +226,7 @@ export const SetupView: React.FC<SetupViewProps> = ({
             <Search className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-[var(--text-3)]" />
           </div>
           <button
+            data-usage-action="search-site"
             type="submit"
             disabled={isSearching || !searchInput.trim()}
             className="px-3.5 h-9 bg-[var(--surface-2)] hover:bg-[var(--surface-3)] rounded-xl text-xs font-bold border border-[var(--border-hair)] transition-colors flex items-center gap-1 disabled:opacity-50"
@@ -282,6 +285,7 @@ export const SetupView: React.FC<SetupViewProps> = ({
             </div>
           </div>
           <button
+            data-usage-action="apply-coords"
             type="button"
             onClick={handleApplyManualCoords}
             className="w-full py-1 bg-[var(--surface-2)] hover:bg-[var(--surface-3)] text-xs font-medium text-[var(--text-1)] rounded-lg border border-[var(--border-hair)] transition-colors"
@@ -304,6 +308,7 @@ export const SetupView: React.FC<SetupViewProps> = ({
         {/* Buffer Shape */}
         <div className="grid grid-cols-2 gap-1.5">
           <button
+            data-usage-action="circle"
             type="button"
             onClick={() => setBufferShape('circle')}
             className={`py-1.5 px-2 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 border transition-colors ${
@@ -316,6 +321,7 @@ export const SetupView: React.FC<SetupViewProps> = ({
             <span>원형 (Circle)</span>
           </button>
           <button
+            data-usage-action="rectangle"
             type="button"
             onClick={() => setBufferShape('rectangle')}
             className={`py-1.5 px-2 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 border transition-colors ${
@@ -333,6 +339,7 @@ export const SetupView: React.FC<SetupViewProps> = ({
         <div className="grid grid-cols-5 gap-1">
           {RADIUS_OPTIONS.map((r) => (
             <button
+              data-usage-action={'radius-step-btn-' + r}
               key={r}
               type="button"
               onClick={() => setRadius(r)}

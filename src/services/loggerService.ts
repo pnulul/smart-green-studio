@@ -27,6 +27,8 @@ export const loggerService = {
   },
 
   log: (studentId: string, action: string, details: string, extra?: Partial<LogEntry>) => {
+    // Public Pages uses the anonymous action catalog rather than detailed course logs.
+    if (studentId === 'demo' && import.meta.env.MODE === 'pages') return;
     const entry: LogEntry = {
       timestamp: new Date().toISOString(),
       student_id: studentId,

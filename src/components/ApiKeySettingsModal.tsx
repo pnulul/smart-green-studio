@@ -170,6 +170,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
             </div>
           </div>
           <button
+            data-usage-action="api-close"
             type="button"
             onClick={onClose}
             className="p-1.5 rounded-lg text-[var(--text-3)] hover:text-[var(--text-1)] hover:bg-[var(--surface-2)] transition-colors"
@@ -214,6 +215,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
                 className="w-full h-9 px-3 pr-9 text-xs bg-[var(--surface-2)] border border-[var(--border-hair)] rounded-lg focus:outline-none focus:border-[var(--accent-dim)] font-mono text-[var(--text-1)]"
               />
               <button
+                data-usage-action="api-visibility"
                 type="button"
                 onClick={() => setShowGoogleKey(!showGoogleKey)}
                 className="absolute right-2.5 top-2.5 text-[var(--text-3)] hover:text-[var(--text-1)]"
@@ -229,6 +231,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
             <div className="flex items-center justify-between text-[10px] text-[var(--text-3)] pt-0.5">
               <span>Geocoding API 및 Maps JavaScript API 활성화 필요</span>
               <a
+                data-usage-action="api-help"
                 href="https://console.cloud.google.com/google/maps-apis/credentials"
                 target="_blank"
                 rel="noreferrer"
@@ -258,6 +261,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
                 className="w-full h-9 px-3 pr-9 text-xs bg-[var(--surface-2)] border border-[var(--border-hair)] rounded-lg focus:outline-none focus:border-[var(--accent-dim)] font-mono text-[var(--text-1)]"
               />
               <button
+                data-usage-action="api-visibility"
                 type="button"
                 onClick={() => setShowVworldKey(!showVworldKey)}
                 className="absolute right-2.5 top-2.5 text-[var(--text-3)] hover:text-[var(--text-1)]"
@@ -273,6 +277,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
             <div className="flex items-center justify-between text-[10px] text-[var(--text-3)] pt-0.5">
               <span>국가공간정보포털 2.0 인증키</span>
               <a
+                data-usage-action="api-help"
                 href="https://www.vworld.kr/dev/v4dv_apikey_s001.do"
                 target="_blank"
                 rel="noreferrer"
@@ -302,6 +307,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
                 className="w-full h-9 px-3 pr-9 text-xs bg-[var(--surface-2)] border border-[var(--border-hair)] rounded-lg focus:outline-none focus:border-[var(--accent-dim)] font-mono text-[var(--text-1)]"
               />
               <button
+                data-usage-action="api-visibility"
                 type="button"
                 onClick={() => setShowKosisKey(!showKosisKey)}
                 className="absolute right-2.5 top-2.5 text-[var(--text-3)] hover:text-[var(--text-1)]"
@@ -317,6 +323,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
             <div className="flex items-center justify-between text-[10px] text-[var(--text-3)] pt-0.5">
               <span>통계청 OpenAPI 서비스 키</span>
               <a
+                data-usage-action="api-help"
                 href="https://kosis.kr/openapi"
                 target="_blank"
                 rel="noreferrer"
@@ -347,6 +354,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
                   className="w-full h-9 px-3 pr-9 text-xs bg-[var(--surface-2)] border border-[var(--border-hair)] rounded-lg focus:outline-none focus:border-[var(--accent-dim)] font-mono text-[var(--text-1)]"
                 />
                 <button
+                  data-usage-action="api-visibility"
                   type="button"
                   onClick={() => setShowGoogleSearchKey(!showGoogleSearchKey)}
                   className="absolute right-2.5 top-2.5 text-[var(--text-3)] hover:text-[var(--text-1)]"
@@ -364,6 +372,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
                   className="w-full h-9 px-3 text-xs bg-[var(--surface-2)] border border-[var(--border-hair)] rounded-lg focus:outline-none focus:border-[var(--accent-dim)] font-mono text-[var(--text-1)] pr-10"
                 />
                 <button
+                  data-usage-action="api-visibility"
                   type="button"
                   onClick={() => setShowGoogleSearchCx(!showGoogleSearchCx)}
                   className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--text-3)] hover:text-[var(--text-1)] transition-colors"
@@ -376,6 +385,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
             <div className="flex items-center justify-between text-[10px] text-[var(--text-3)] pt-0.5">
               <span>검색엔진 ID(CX)와 API Key 모두 필요</span>
               <a
+                data-usage-action="api-help"
                 href="https://developers.google.com/custom-search/v1/overview"
                 target="_blank"
                 rel="noreferrer"
@@ -390,6 +400,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
         {/* Footer Actions */}
         <div className="p-4 sm:p-5 border-t border-[var(--border-hair)] bg-[var(--surface-1)] flex items-center justify-between">
           <button
+            data-usage-action="api-test"
             type="button"
             onClick={handleTestAll}
             disabled={isTesting}
@@ -401,6 +412,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
 
           <div className="flex items-center gap-2">
             <button
+              data-usage-action="api-close"
               type="button"
               onClick={onClose}
               className="px-4 py-2 rounded-xl text-xs font-medium text-[var(--text-2)] hover:text-[var(--text-1)] hover:bg-[var(--surface-2)] transition-colors"
@@ -408,6 +420,7 @@ export const ApiKeySettingsModal: React.FC<ApiKeySettingsModalProps> = ({
               취소
             </button>
             <button
+              data-usage-action="api-save"
               type="button"
               onClick={handleSave}
               className="px-5 py-2 rounded-xl bg-[var(--accent)] hover:opacity-90 text-[#080B0F] font-bold text-xs shadow-lg transition-opacity flex items-center gap-1.5"
