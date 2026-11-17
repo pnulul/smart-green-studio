@@ -1,0 +1,14 @@
+{
+  "configured": true,
+  "type": "raster",
+  "opacity": 0.8,
+  "classes": [
+    { "min": 0, "max": 10, "includeMin": true, "includeMax": false, "color": "#1A9850", "label": "0~10°" },
+    { "min": 10, "max": 20, "includeMin": true, "includeMax": false, "color": "#66BD63", "label": "10~20°" },
+    { "min": 20, "max": 30, "includeMin": true, "includeMax": false, "color": "#A6D96A", "label": "20~30°" },
+    { "min": 30, "max": 40, "includeMin": true, "includeMax": false, "color": "#FFFFBF", "label": "30~40°" },
+    { "min": 40, "max": 50, "includeMin": true, "includeMax": false, "color": "#FDAE61", "label": "40~50°" },
+    { "min": 50, "max": 60, "includeMin": true, "includeMax": true, "color": "#F46D43", "label": "50~60°" },
+    { "min": 60, "max": 9999, "includeMin": false, "includeMax": true, "color": "#D73027", "label": "60° 초과" }
+  ]
+}

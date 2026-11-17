@@ -1,0 +1,18 @@
+{
+  "id": "01_buildings",
+  "folder": "01_buildings",
+  "nameKo": "건물",
+  "nameEn": "Buildings",
+  "description": "실제 건축물 Polygon 공간정보",
+  "category": "urban",
+  "geometryType": "Polygon",
+  "mapFile": "layer.geojson",
+  "styleFile": "style.json",
+  "sourceMode": "DEMO",
+  "analysisType": "Count/Density/Area",
+  "valueField": "DN",
+  "labelField": "DN",
+  "unit": null,
+  "sourceLayer": null,
+  "dataType": "vector"
+}

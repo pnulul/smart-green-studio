@@ -1,0 +1,15 @@
+{
+  "id": "27_drainage_grade",
+  "folder": "27_drainage_grade",
+  "nameKo": "배수등급도",
+  "nameEn": "Drainage Grade",
+  "category": "water",
+  "geometryType": "Polygon",
+  "mapFile": "layer.geojson",
+  "styleFile": "style.json",
+  "sourceMode": "REAL",
+  "analysisType": "Categorical",
+  "valueField": "DN",
+  "labelField": "DN",
+  "dataType": "vector"
+}

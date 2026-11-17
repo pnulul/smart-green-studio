@@ -1,0 +1,57 @@
+{
+  "configured": true,
+  "field": "building_use",
+  "type": "categorical",
+  "classes": [
+    {
+      "value": "주거",
+      "label": "주거",
+      "color": "#f2d98d"
+    },
+    {
+      "value": "근린생활",
+      "label": "근린생활",
+      "color": "#f0a878"
+    },
+    {
+      "value": "업무",
+      "label": "업무",
+      "color": "#6f9fd0"
+    },
+    {
+      "value": "판매",
+      "label": "판매",
+      "color": "#e0607f"
+    },
+    {
+      "value": "숙박",
+      "label": "숙박",
+      "color": "#a97fd0"
+    },
+    {
+      "value": "문화·집회",
+      "label": "문화·집회",
+      "color": "#5fbfb0"
+    },
+    {
+      "value": "교육·복지",
+      "label": "교육·복지",
+      "color": "#86c06a"
+    },
+    {
+      "value": "공업",
+      "label": "공업",
+      "color": "#9c8878"
+    },
+    {
+      "value": "기타",
+      "label": "기타",
+      "color": "#c4c4c4"
+    },
+    {
+      "value": "미상",
+      "label": "미상",
+      "color": "#ececec"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "configured": true,
+  "type": "vector",
+  "field": "DN",
+  "fillOpacity": 0.65,
+  "classes": [
+    { "value": 1, "label": "제1종전용주거지역", "color": "#FFF2B2" },
+    { "value": 2, "label": "제2종전용주거지역", "color": "#FFE082" },
+    { "value": 3, "label": "제1종일반주거지역", "color": "#FFD54F" },
+    { "value": 4, "label": "제2종일반주거지역", "color": "#FFC107" },
+    { "value": 5, "label": "제3종일반주거지역", "color": "#FFB300" },
+    { "value": 6, "label": "준주거지역", "color": "#F57C00" },
+
+    { "value": 7, "label": "중심상업지역", "color": "#B71C1C" },
+    { "value": 8, "label": "일반상업지역", "color": "#D32F2F" },
+    { "value": 9, "label": "근린상업지역", "color": "#EF5350" },
+    { "value": 10, "label": "유통상업지역", "color": "#FF8A80" },
+
+    { "value": 11, "label": "전용공업지역", "color": "#6A1B9A" },
+    { "value": 12, "label": "일반공업지역", "color": "#8E44AD" },
+    { "value": 13, "label": "준공업지역", "color": "#BA68C8" },
+
+    { "value": 14, "label": "보전녹지지역", "color": "#1B5E20" },
+    { "value": 15, "label": "생산녹지지역", "color": "#43A047" },
+    { "value": 16, "label": "자연녹지지역", "color": "#81C784" }
+  ]
+}

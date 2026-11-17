@@ -1,0 +1,18 @@
+{
+  "id": "03_completion_year",
+  "folder": "03_completion_year",
+  "nameKo": "준공연대",
+  "nameEn": "Completion Year",
+  "description": "건축물의 준공년도 또는 준공연대 분석",
+  "category": "urban",
+  "geometryType": "Polygon",
+  "mapFile": "layer.geojson",
+  "styleFile": "style.json",
+  "sourceMode": "DEMO",
+  "analysisType": "Area/Ratio",
+  "valueField": "DN",
+  "labelField": "DN",
+  "unit": null,
+  "sourceLayer": "01_buildings",
+  "dataType": "vector"
+}

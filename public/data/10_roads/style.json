@@ -1,0 +1,14 @@
+{
+  "configured": true,
+  "field": "DN",
+  "type": "category",
+  "classes": [
+    {
+      "value": "도로",
+      "label": "도로",
+      "color": "#0ea5e9",
+      "weight": 6,
+      "opacity": 0.85
+    }
+  ]
+}

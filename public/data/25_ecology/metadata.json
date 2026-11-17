@@ -1,0 +1,16 @@
+{
+  "id": "25_ecology",
+  "folder": "25_ecology",
+  "nameKo": "생태자연도",
+  "nameEn": "Ecological Nature Map",
+  "category": "green",
+  "geometryType": "Raster",
+  "mapFile": "layer.tif",
+  "styleFile": "style.json",
+  "sourceMode": "REAL",
+  "analysisType": "Categorical",
+  "valueField": "pixel",
+  "labelField": "pixel",
+  "dataType": "raster",
+  "noDataValues": [0]
+}

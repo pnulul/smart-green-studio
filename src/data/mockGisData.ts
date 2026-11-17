@@ -1,0 +1,258 @@
+import { BuildingGisAnalysis, LandParcelAnalysis, BuildingGisItem, LandParcelItem } from '../types';
+
+export function generateMockBuildingGis(lat: number, lng: number, siteKey: string): BuildingGisAnalysis {
+  const isPnu = siteKey === 'pnu' || lat > 35.2;
+  const isSeomyeon = siteKey === 'seomyeon' || (lat > 35.15 && lat < 35.17);
+  const isHaeundae = siteKey === 'haeundae' || lng > 129.15;
+
+  const buildings: BuildingGisItem[] = [
+    {
+      id: 'bld-01',
+      bldName: isPnu ? '부산대학교 본관 및 대학본부' : isSeomyeon ? '서면 메디컬타워' : '해운대 복합문화센터',
+      floors: isPnu ? 8 : isSeomyeon ? 18 : 6,
+      structure: '철근콘크리트구조 (RC)',
+      mainUsage: isPnu ? '교육연구시설 (행정)' : isSeomyeon ? '제1종근린생활/의료' : '문화및집회시설',
+      grossFloorAreaM2: isPnu ? 14200 : isSeomyeon ? 32000 : 8900,
+      buildingAreaM2: isPnu ? 2100 : isSeomyeon ? 1850 : 1500,
+      coverageRatioPct: 48.2,
+      floorAreaRatioPct: isPnu ? 180 : isSeomyeon ? 680 : 210,
+      builtYear: isPnu ? 2008 : isSeomyeon ? 2017 : 2012,
+      rooftopAreaM2: isPnu ? 1650 : isSeomyeon ? 1400 : 1200,
+      greenRoofPotential: '최우수',
+      structuralLoadCapacity: '고하중(혼합/집약형)',
+      solarPotentialKw: 85.4,
+      lat: lat + 0.0008,
+      lng: lng + 0.0006,
+    },
+    {
+      id: 'bld-02',
+      bldName: isPnu ? '부산대 중앙도서관' : isSeomyeon ? '쥬디스태화 본관' : '해운대 호텔타워',
+      floors: isPnu ? 6 : isSeomyeon ? 12 : 22,
+      structure: '철골철근콘크리트구조 (SRC)',
+      mainUsage: isPnu ? '교육연구시설 (도서관)' : isSeomyeon ? '판매시설 및 상업' : '숙박시설',
+      grossFloorAreaM2: isPnu ? 18500 : isSeomyeon ? 28500 : 45000,
+      buildingAreaM2: isPnu ? 3200 : isSeomyeon ? 2400 : 2100,
+      coverageRatioPct: 52.0,
+      floorAreaRatioPct: isPnu ? 195 : isSeomyeon ? 720 : 850,
+      builtYear: isPnu ? 2002 : isSeomyeon ? 1998 : 2019,
+      rooftopAreaM2: isPnu ? 2800 : isSeomyeon ? 1950 : 1600,
+      greenRoofPotential: '최우수',
+      structuralLoadCapacity: '고하중(혼합/집약형)',
+      solarPotentialKw: 140.2,
+      lat: lat + 0.0015,
+      lng: lng - 0.0012,
+    },
+    {
+      id: 'bld-03',
+      bldName: isPnu ? '제2공학관 (조선해양관)' : isSeomyeon ? '삼정타워 상업복합' : '중동 공영주차빌딩',
+      floors: isPnu ? 7 : isSeomyeon ? 16 : 5,
+      structure: '철근콘크리트구조 (RC)',
+      mainUsage: isPnu ? '교육연구시설' : isSeomyeon ? '복합쇼핑/문화' : '주차장/공공시설',
+      grossFloorAreaM2: isPnu ? 12800 : isSeomyeon ? 39800 : 7200,
+      buildingAreaM2: isPnu ? 1900 : isSeomyeon ? 2600 : 1450,
+      coverageRatioPct: 45.8,
+      floorAreaRatioPct: isPnu ? 175 : isSeomyeon ? 640 : 190,
+      builtYear: isPnu ? 2011 : isSeomyeon ? 2019 : 2015,
+      rooftopAreaM2: isPnu ? 1500 : isSeomyeon ? 2100 : 1300,
+      greenRoofPotential: '우수',
+      structuralLoadCapacity: '중하중(저관리경량)',
+      solarPotentialKw: 92.0,
+      lat: lat - 0.0012,
+      lng: lng + 0.0018,
+    },
+    {
+      id: 'bld-04',
+      bldName: isPnu ? '장전역 역세권 청년복합타운' : isSeomyeon ? '전포 카페거리 상가주택 A' : '해운대 비치프론트 상가',
+      floors: 4,
+      structure: '철근콘크리트구조 (RC)',
+      mainUsage: '제2종근린생활 및 다가구주택',
+      grossFloorAreaM2: 2400,
+      buildingAreaM2: 620,
+      coverageRatioPct: 58.5,
+      floorAreaRatioPct: 220,
+      builtYear: 2014,
+      rooftopAreaM2: 520,
+      greenRoofPotential: '우수',
+      structuralLoadCapacity: '중하중(저관리경량)',
+      solarPotentialKw: 32.5,
+      lat: lat - 0.0018,
+      lng: lng - 0.0008,
+    },
+    {
+      id: 'bld-05',
+      bldName: isPnu ? '금정구 청년창업지원센터' : isSeomyeon ? '부전동 공공업무빌딩' : '해운대 관광종합안내소',
+      floors: 5,
+      structure: '철골조 및 RC',
+      mainUsage: '업무시설 (공공)',
+      grossFloorAreaM2: 4500,
+      buildingAreaM2: 950,
+      coverageRatioPct: 49.0,
+      floorAreaRatioPct: 230,
+      builtYear: 2016,
+      rooftopAreaM2: 820,
+      greenRoofPotential: '최우수',
+      structuralLoadCapacity: '고하중(혼합/집약형)',
+      solarPotentialKw: 48.0,
+      lat: lat + 0.0022,
+      lng: lng + 0.0014,
+    },
+    {
+      id: 'bld-06',
+      bldName: isPnu ? '장전동 노후 상가빌딩 B' : isSeomyeon ? '서면 지하상가 출구연계 빌딩' : '구남로 상업시설 C',
+      floors: 3,
+      structure: '벽돌조 (조적조)',
+      mainUsage: '제1종근린생활시설',
+      grossFloorAreaM2: 980,
+      buildingAreaM2: 340,
+      coverageRatioPct: 68.0,
+      floorAreaRatioPct: 190,
+      builtYear: 1986,
+      rooftopAreaM2: 300,
+      greenRoofPotential: '보통',
+      structuralLoadCapacity: '경량형',
+      solarPotentialKw: 15.2,
+      lat: lat - 0.0005,
+      lng: lng + 0.0025,
+    },
+  ];
+
+  const totalBuildingsCount = isPnu ? 1420 : isSeomyeon ? 2180 : 1650;
+  const totalGrossFloorAreaM2 = isPnu ? 485000 : isSeomyeon ? 1240000 : 790000;
+  const totalRooftopAreaM2 = isPnu ? 112000 : isSeomyeon ? 195000 : 142000;
+  const greenRoofFeasibleAreaM2 = isPnu ? 42500 : isSeomyeon ? 68000 : 49500;
+
+  return {
+    totalBuildingsCount,
+    totalGrossFloorAreaM2,
+    totalRooftopAreaM2,
+    greenRoofFeasibleAreaM2,
+    greenRoofCoolingPotentialDelta: isPnu ? '-1.8 °C 도시열섬 완화' : isSeomyeon ? '-2.4 °C 도심열섬 완화' : '-1.5 °C 열쾌적성 증진',
+    carbonOffsetTonsPerYear: isPnu ? 84.5 : isSeomyeon ? 136.0 : 98.4,
+    avgBuildingAgeYears: isPnu ? 19.4 : isSeomyeon ? 24.8 : 16.2,
+    structureBreakdown: [
+      { structure: '철근콘크리트 (RC)', count: Math.round(totalBuildingsCount * 0.68), ratio: 68 },
+      { structure: '철골/철골철근 (SRC)', count: Math.round(totalBuildingsCount * 0.18), ratio: 18 },
+      { structure: '조적/벽돌조', count: Math.round(totalBuildingsCount * 0.11), ratio: 11 },
+      { structure: '기타/목조', count: Math.round(totalBuildingsCount * 0.03), ratio: 3 },
+    ],
+    usageBreakdown: [
+      { usage: '근린생활·상업', count: Math.round(totalBuildingsCount * 0.42), areaM2: Math.round(totalGrossFloorAreaM2 * 0.38), ratio: 42 },
+      { usage: '주거용 (공동/단독)', count: Math.round(totalBuildingsCount * 0.36), areaM2: Math.round(totalGrossFloorAreaM2 * 0.32), ratio: 36 },
+      { usage: '교육연구시설', count: Math.round(totalBuildingsCount * 0.12), areaM2: Math.round(totalGrossFloorAreaM2 * 0.20), ratio: 12 },
+      { usage: '업무·공공시설', count: Math.round(totalBuildingsCount * 0.10), areaM2: Math.round(totalGrossFloorAreaM2 * 0.10), ratio: 10 },
+    ],
+    topGreenRoofCandidates: buildings.filter((b) => b.greenRoofPotential === '최우수' || b.greenRoofPotential === '우수'),
+    buildingsList: buildings,
+  };
+}
+
+export function generateMockLandParcelGis(lat: number, lng: number, siteKey: string): LandParcelAnalysis {
+  const isPnu = siteKey === 'pnu' || lat > 35.2;
+  const isSeomyeon = siteKey === 'seomyeon' || (lat > 35.15 && lat < 35.17);
+
+  const parcels: LandParcelItem[] = [
+    {
+      pnu: '2641010100100400000',
+      jibun: isPnu ? '장전동 40' : isSeomyeon ? '부전동 520-2' : '중동 1394-1',
+      jimok: isPnu ? '학교용지' : isSeomyeon ? '도로/광장' : '공원용지',
+      areaM2: isPnu ? 85000 : isSeomyeon ? 4200 : 12400,
+      ownership: '국유지',
+      publicLandPricePerM2: isPnu ? 2150000 : isSeomyeon ? 14800000 : 5600000,
+      totalLandValueMillionKrw: isPnu ? 182750 : isSeomyeon ? 62160 : 69440,
+      zoning: isPnu ? '자연녹지 및 제2종일반주거' : '일반상업지역',
+      acquisitionFeasibility: '매우 높음(국공유지)',
+      greenInfraSuitabilityScore: 95,
+      recommendedIntervention: isPnu ? '사면보강 테라스가든 & 캠퍼스 둘레길' : '도심 쿨링 포켓파크 & 투수블록',
+      lat: lat + 0.0005,
+      lng: lng - 0.0004,
+    },
+    {
+      pnu: '2641010100104120000',
+      jibun: isPnu ? '장전동 412-1' : isSeomyeon ? '부전동 502-14' : '우동 620-3',
+      jimok: '도로',
+      areaM2: isPnu ? 3200 : isSeomyeon ? 2800 : 3500,
+      ownership: '시·구유지(공유지)',
+      publicLandPricePerM2: isPnu ? 3400000 : isSeomyeon ? 18200000 : 8900000,
+      totalLandValueMillionKrw: isPnu ? 10880 : isSeomyeon ? 50960 : 31150,
+      zoning: '도시계획시설 (도로)',
+      acquisitionFeasibility: '매우 높음(국공유지)',
+      greenInfraSuitabilityScore: 92,
+      recommendedIntervention: '보행자 쿨링 가로숲길 & 빗물 식생수로(LID)',
+      lat: lat + 0.0012,
+      lng: lng + 0.0008,
+    },
+    {
+      pnu: '2641010100103890001',
+      jibun: isPnu ? '장전동 389-1' : isSeomyeon ? '전포동 684-2' : '중동 1124-5',
+      jimok: '잡종지',
+      areaM2: isPnu ? 780 : isSeomyeon ? 450 : 620,
+      ownership: '시·구유지(공유지)',
+      publicLandPricePerM2: isPnu ? 2800000 : isSeomyeon ? 9800000 : 4200000,
+      totalLandValueMillionKrw: isPnu ? 2184 : isSeomyeon ? 4410 : 2604,
+      zoning: '제2종일반주거지역',
+      acquisitionFeasibility: '매우 높음(국공유지)',
+      greenInfraSuitabilityScore: 96,
+      recommendedIntervention: '쌈지공원 (Pocket Park) & 스마트 쉼터',
+      lat: lat - 0.0009,
+      lng: lng + 0.0015,
+    },
+    {
+      pnu: '2641010100103950000',
+      jibun: isPnu ? '장전동 395' : isSeomyeon ? '부전동 255-1' : '중동 1402',
+      jimok: '대',
+      areaM2: isPnu ? 640 : isSeomyeon ? 520 : 480,
+      ownership: '사유지',
+      publicLandPricePerM2: isPnu ? 4100000 : isSeomyeon ? 22500000 : 12400000,
+      totalLandValueMillionKrw: isPnu ? 2624 : isSeomyeon ? 11700 : 5952,
+      zoning: isPnu ? '제2종일반주거' : '일반상업지역',
+      acquisitionFeasibility: '중간(민관협력/매입)',
+      greenInfraSuitabilityScore: 78,
+      recommendedIntervention: '공개공지 연계 옥외 쉼터 & 벽면녹화',
+      lat: lat - 0.0016,
+      lng: lng - 0.0011,
+    },
+    {
+      pnu: '2641010100104200000',
+      jibun: isPnu ? '장전동 420-5' : isSeomyeon ? '부전동 188-4' : '우동 540-8',
+      jimok: '주차장용지',
+      areaM2: isPnu ? 1250 : isSeomyeon ? 980 : 1100,
+      ownership: '사유지',
+      publicLandPricePerM2: isPnu ? 3800000 : isSeomyeon ? 19500000 : 9800000,
+      totalLandValueMillionKrw: isPnu ? 4750 : isSeomyeon ? 19110 : 10780,
+      zoning: '준주거 및 상업지역',
+      acquisitionFeasibility: '높음(공공협약)',
+      greenInfraSuitabilityScore: 88,
+      recommendedIntervention: '그린 파킹(투수포장) & 그늘목 캐노피',
+      lat: lat + 0.0018,
+      lng: lng - 0.0015,
+    },
+  ];
+
+  const totalParcelsCount = isPnu ? 840 : isSeomyeon ? 1260 : 920;
+  const totalAreaM2 = isPnu ? 785000 : isSeomyeon ? 620000 : 810000;
+  const publicOwnedRatioPct = isPnu ? 41.5 : isSeomyeon ? 28.4 : 35.8;
+  const privateOwnedRatioPct = parseFloat((100 - publicOwnedRatioPct).toFixed(1));
+  const avgPublicLandPricePerM2 = isPnu ? 3250000 : isSeomyeon ? 16400000 : 7800000;
+
+  return {
+    totalParcelsCount,
+    totalAreaM2,
+    publicOwnedRatioPct,
+    privateOwnedRatioPct,
+    avgPublicLandPricePerM2,
+    jimokDistribution: [
+      { jimok: '대 (대지)', count: Math.round(totalParcelsCount * 0.54), areaM2: Math.round(totalAreaM2 * 0.44), ratioPct: 54, color: '#f59e0b' },
+      { jimok: '도로·교통용지', count: Math.round(totalParcelsCount * 0.18), areaM2: Math.round(totalAreaM2 * 0.16), ratioPct: 18, color: '#64748b' },
+      { jimok: '학교용지·공공', count: Math.round(totalParcelsCount * 0.12), areaM2: Math.round(totalAreaM2 * 0.24), ratioPct: 12, color: '#38bdf8' },
+      { jimok: '공원·녹지', count: Math.round(totalParcelsCount * 0.08), areaM2: Math.round(totalAreaM2 * 0.12), ratioPct: 8, color: '#22c55e' },
+      { jimok: '잡종지·주차장', count: Math.round(totalParcelsCount * 0.08), areaM2: Math.round(totalAreaM2 * 0.04), ratioPct: 8, color: '#a855f7' },
+    ],
+    ownershipDistribution: [
+      { type: '사유지 (개인/법인)', count: Math.round(totalParcelsCount * 0.65), areaM2: Math.round(totalAreaM2 * 0.585), ratioPct: privateOwnedRatioPct, color: '#94a3b8' },
+      { type: '국유지', count: Math.round(totalParcelsCount * 0.22), areaM2: Math.round(totalAreaM2 * 0.285), ratioPct: Math.round(publicOwnedRatioPct * 0.68), color: '#0284c7' },
+      { type: '시·구유지 (지자체)', count: Math.round(totalParcelsCount * 0.13), areaM2: Math.round(totalAreaM2 * 0.130), ratioPct: Math.round(publicOwnedRatioPct * 0.32), color: '#10b981' },
+    ],
+    highFeasibilityParcels: parcels.filter((p) => p.acquisitionFeasibility.includes('높음')),
+    parcelsList: parcels,
+  };
+}

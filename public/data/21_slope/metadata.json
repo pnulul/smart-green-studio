@@ -1,0 +1,16 @@
+{
+  "id": "21_slope",
+  "folder": "21_slope",
+  "nameKo": "경사",
+  "nameEn": "Slope",
+  "category": "terrain",
+  "geometryType": "Raster",
+  "mapFile": "layer.tif",
+  "styleFile": "style.json",
+  "sourceMode": "REAL",
+  "analysisType": "Average",
+  "valueField": "pixel",
+  "labelField": "pixel",
+  "dataType": "raster",
+  "unit": "°"
+}

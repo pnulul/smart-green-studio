@@ -1,0 +1,15 @@
+{
+  "id": "24_landcover_major",
+  "folder": "24_landcover_major",
+  "nameKo": "토지피복도 대분류",
+  "nameEn": "Land Cover Major",
+  "category": "green",
+  "geometryType": "Raster",
+  "mapFile": "layer.tif",
+  "styleFile": "style.json",
+  "sourceMode": "REAL",
+  "analysisType": "Categorical",
+  "valueField": "pixel",
+  "labelField": "pixel",
+  "dataType": "raster"
+}

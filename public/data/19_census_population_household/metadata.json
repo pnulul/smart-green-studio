@@ -1,0 +1,18 @@
+{
+  "id": "19_census_population_household",
+  "folder": "19_census_population_household",
+  "nameKo": "집계구·행정동 인구가구",
+  "nameEn": "Census and Administrative Population / Household",
+  "description": "집계구 또는 행정동 단위 인구, 가구, 연령, 밀도 등의 사회통계",
+  "category": "urban",
+  "geometryType": "Polygon",
+  "mapFile": "layer.geojson",
+  "styleFile": "style.json",
+  "sourceMode": "DEMO",
+  "analysisType": "Sum/Density",
+  "valueField": "DN",
+  "labelField": "DN",
+  "unit": null,
+  "sourceLayer": null,
+  "dataType": "vector"
+}

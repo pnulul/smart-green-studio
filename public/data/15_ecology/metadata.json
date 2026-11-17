@@ -1,0 +1,18 @@
+{
+  "id": "15_ecology",
+  "folder": "15_ecology",
+  "nameKo": "생태자연도",
+  "nameEn": "Ecological Naturalness Map",
+  "description": "생태자연도 1등급, 2등급, 3등급 및 별도관리지역 분석",
+  "category": "ecology",
+  "geometryType": "Polygon",
+  "mapFile": "layer.geojson",
+  "styleFile": "style.json",
+  "sourceMode": "DEMO",
+  "analysisType": "Area/Ratio",
+  "valueField": "DN",
+  "labelField": "DN",
+  "unit": null,
+  "sourceLayer": null,
+  "dataType": "vector"
+}

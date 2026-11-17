@@ -1,0 +1,18 @@
+{
+  "id": "18_population_grid",
+  "folder": "18_population_grid",
+  "nameKo": "격자인구",
+  "nameEn": "Grid Population",
+  "description": "일정 크기의 공간 Grid 단위 인구 및 인구밀도 분석",
+  "category": "urban",
+  "geometryType": "Raster",
+  "mapFile": "layer.tif",
+  "styleFile": "style.json",
+  "sourceMode": "DEMO",
+  "analysisType": "Sum/Average",
+  "valueField": "DN",
+  "labelField": "DN",
+  "unit": null,
+  "sourceLayer": null,
+  "dataType": "raster"
+}

@@ -1,0 +1,66 @@
+# Smart Green Studio
+
+부산대학교 조경학과 도시조경 연구실의 공간분석 학습 플랫폼입니다. 공개 체험 모드에서 대상지 설정, 19종 공간데이터 분석, 보고서, AI 연구실을 이용합니다.
+
+## 바로 실행
+
+1. 이 폴더의 `START.cmd`를 실행합니다.
+2. Chrome 또는 Edge에서 `http://127.0.0.1:3000`을 엽니다.
+3. **로그인 없이 체험하기**를 누릅니다.
+4. 기본 대상지에서 **공간 특성 종합 분석 실행**을 누릅니다. 원형 반경 500m가 기본값입니다.
+5. 분석이 끝나면 주제별 지도와 수치를 확인하고 **보고서** 탭으로 이동합니다.
+
+처음 실행할 때 패키지 설치와 빌드에 인터넷이 필요합니다. Node.js 24 LTS와 pnpm 11.25.0을 사용합니다. 이 PC에서는 설치된 Codex 런타임도 자동으로 찾습니다. 지도 배경 타일과 주소 검색은 인터넷을 사용합니다. 분석 대상 범위를 벗어난 자료는 빈 결과 또는 자료 없음으로 표시합니다.
+
+터미널에서 실행하려면:
+
+```powershell
+npm install --global pnpm@11.25.0
+pnpm install --frozen-lockfile
+pnpm run build
+pnpm start
+```
+
+개발 중에는 `pnpm dev`를 사용합니다. 타입 검사는 `pnpm lint`, 서버 검증은 `pnpm test`입니다.
+
+## GitHub Pages 업데이트
+
+`pnulul/smart-green-studio` 저장소의 `main` 브랜치에 변경 사항을 올리면 GitHub Actions가 타입 검사와 테스트를 실행하고 공개 체험판을 빌드해 배포합니다. 배포 결과와 실행 기록은 저장소의 **Actions** 탭에서 확인합니다. [배포 기록](https://github.com/pnulul/smart-green-studio/actions/workflows/deploy.yml)
+
+GitHub Desktop에서는 이 폴더를 연 다음 변경 사항을 커밋하고 **Push origin**을 누릅니다. 터미널에서는 커밋 후 `git push origin main`을 실행합니다. 압축한 공간자료 중 가장 큰 파일은 약 48 MiB입니다.
+
+## Google Sites와 VR 연결
+
+Google Sites 편집 화면에서 **삽입 → 버튼**을 선택하고 원하는 이름과 URL을 입력합니다. **삽입**을 누른 뒤 사이트 오른쪽 위에서 **게시**를 선택합니다. [Google Sites 버튼 도움말](https://support.google.com/sites/answer/90538?hl=ko)
+
+| 버튼 이름 | 연결할 URL |
+| --- | --- |
+| Smart Green Studio 체험하기 | https://pnulul.github.io/smart-green-studio/ |
+| 수목 관리 VR 실습 | https://pnulul.github.io/vr/ |
+
+## AI 대화 설정
+
+공간분석과 보고서는 Gemini 키 없이 작동합니다. AI 대화는 실제 모델 호출이므로 별도 API 키가 필요합니다.
+
+공개 Pages 체험에서는 **AI 연구실 → AI 연결 설정**에 본인 Gemini API 키를 입력합니다. 키는 현재 탭의 메모리에서만 사용하며 코드나 브라우저 저장소에 보관하지 않습니다. 질문과 완료된 분석 요약을 Google Gemini로 보내고 실제 답변을 표시합니다. 키가 없거나 호출이 실패하면 안내를 표시합니다.
+
+[Google AI Studio 키 발급](https://aistudio.google.com/apikey) / [모델 안내](https://aistudio.google.com/docs/models)
+
+기본 모델은 `gemini-3.5-flash-lite`이며 AI 설정에서 변경할 수 있습니다. 키 계정의 사용 요금과 한도가 적용됩니다. 교수자 공용 키를 소스나 `VITE_*` 환경변수에 넣어 공개하지 마세요.
+
+공용 키로 방문객에게 AI 대화를 제공하려면 GitHub Pages 외에 키를 보관할 서버가 필요합니다. 이 패키지에는 별도의 수업용 서버 API가 포함되어 있으며, 인증한 수강생만 서버 키를 사용하도록 구성했습니다. 정적 Pages에서는 해당 서버 기능을 자동 호출하지 않습니다.
+
+## 수업용 서버를 별도로 운영할 경우
+
+`.env.example`을 `.env`로 복사하고 운영자가 새 수업 ID 목록, 수업 비밀번호, 세션 서명값과 Gemini 키를 입력합니다. 원본에 들어 있던 수강생 계정, 공통 비밀번호, 학생별 CSV 기록은 공개 패키지에서 제외했습니다.
+
+`pnpm build` 후 `pnpm start`로 Node 서버를 실행합니다. 기본 접속은 이 PC의 `127.0.0.1:3000`입니다. 외부 서버 공개 시에는 별도의 HTTPS 호스팅 설정을 적용합니다. `.env`는 Git에서 제외됩니다.
+
+## 자료와 복구 범위
+
+- Drive ZIP에 있던 공간자료를 사용하며 원본 ZIP은 작업용 백업으로 보존했습니다.
+- 공개 파일에는 압축 벡터, GeoTIFF, 메타데이터와 스타일을 포함했습니다. 원래의 대형 비압축 벡터를 추가로 올릴 필요가 없습니다.
+- `scripts/prepare-data.mjs`가 배포용 자료 디렉터리를 만듭니다. 브라우저는 압축 자료를 스트리밍으로 풀고 Worker에서 대상지 경계를 계산합니다.
+- 주제별 분석과 AI 대화는 실제 분석 결과를 사용합니다. 원본의 합성 OSM 조회와 예시 비교 기능은 공개 체험의 시작 흐름에서 제외했습니다.
+- 분석 결과는 현재 브라우저에서 사용합니다. 페이지를 새로 열면 다시 분석합니다. 분석 결과 파일과 보고서는 화면에서 내려받을 수 있습니다.
+- `VALIDATION.md`에서 실행 확인 결과와 실제 API 호출 확인 범위를 볼 수 있습니다.

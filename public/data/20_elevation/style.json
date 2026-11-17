@@ -1,0 +1,12 @@
+{
+  "configured": true,
+  "type": "raster",
+  "opacity": 0.8,
+  "classes": [
+    { "min": 0, "max": 100, "includeMin": true, "includeMax": false, "color": "#2c7bb6", "label": "0~100m" },
+    { "min": 100, "max": 200, "includeMin": true, "includeMax": false, "color": "#abd9e9", "label": "100~200m" },
+    { "min": 200, "max": 300, "includeMin": true, "includeMax": false, "color": "#ffffbf", "label": "200~300m" },
+    { "min": 300, "max": 400, "includeMin": true, "includeMax": false, "color": "#fdae61", "label": "300~400m" },
+    { "min": 400, "max": 9999, "includeMin": true, "includeMax": true, "color": "#d7191c", "label": "400m 이상" }
+  ]
+}

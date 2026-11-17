@@ -1,0 +1,18 @@
+{
+  "id": "07_green_park_river",
+  "folder": "07_green_park_river",
+  "nameKo": "공원·녹지·하천",
+  "nameEn": "Parks, Green Space and Rivers",
+  "description": "공원, 도시녹지, 산림, 하천 등 녹지 및 수공간",
+  "category": "green",
+  "geometryType": "Polygon",
+  "mapFile": "layer.geojson",
+  "styleFile": "style.json",
+  "sourceMode": "DEMO",
+  "analysisType": "Area/Ratio",
+  "valueField": "DN",
+  "labelField": "DN",
+  "unit": null,
+  "sourceLayer": null,
+  "dataType": "vector"
+}

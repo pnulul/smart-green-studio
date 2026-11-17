@@ -1,0 +1,15 @@
+{
+  "id": "26_river",
+  "folder": "26_river",
+  "nameKo": "하천",
+  "nameEn": "River",
+  "category": "water",
+  "geometryType": "Polygon",
+  "mapFile": "layer.geojson",
+  "styleFile": "style.json",
+  "sourceMode": "REAL",
+  "analysisType": "General",
+  "valueField": "DN",
+  "labelField": "DN",
+  "dataType": "vector"
+}

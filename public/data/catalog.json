@@ -1,0 +1,180 @@
+{
+  "datasets": [
+    {
+      "id": "01_buildings",
+      "folder": "01_buildings",
+      "nameKo": "건물",
+      "nameEn": "Buildings",
+      "category": "urban",
+      "enabled": true
+    },
+    {
+      "id": "02_building_use",
+      "folder": "02_building_use",
+      "nameKo": "건축물 용도",
+      "nameEn": "Building Use",
+      "category": "urban",
+      "enabled": true
+    },
+    {
+      "id": "03_completion_year",
+      "folder": "03_completion_year",
+      "nameKo": "준공연대",
+      "nameEn": "Completion Year",
+      "category": "urban",
+      "enabled": true
+    },
+    {
+      "id": "04_highrise",
+      "folder": "04_highrise",
+      "nameKo": "고층건물",
+      "nameEn": "High-rise Buildings",
+      "category": "urban",
+      "enabled": true
+    },
+    {
+      "id": "05_lowrise",
+      "folder": "05_lowrise",
+      "nameKo": "저층건물",
+      "nameEn": "Low-rise Buildings",
+      "category": "urban",
+      "enabled": true
+    },
+    {
+      "id": "06_zoning",
+      "folder": "06_zoning",
+      "nameKo": "용도지역",
+      "nameEn": "Zoning",
+      "category": "landuse",
+      "enabled": true
+    },
+    {
+      "id": "07_green_park_river",
+      "folder": "07_green_park_river",
+      "nameKo": "공원·녹지·하천",
+      "nameEn": "Parks, Green Space and Rivers",
+      "category": "green",
+      "enabled": true
+    },
+    {
+      "id": "08_district_zone",
+      "folder": "08_district_zone",
+      "nameKo": "용도지구·구역",
+      "nameEn": "Districts and Zones",
+      "category": "landuse",
+      "enabled": true
+    },
+    {
+      "id": "10_roads",
+      "folder": "10_roads",
+      "nameKo": "도로",
+      "nameEn": "Roads",
+      "category": "urban",
+      "enabled": true
+    },
+    {
+      "id": "11_transit",
+      "folder": "11_transit",
+      "nameKo": "지하철·버스",
+      "nameEn": "Public Transit",
+      "category": "urban",
+      "enabled": true
+    },
+    {
+      "id": "15_ecology",
+      "folder": "15_ecology",
+      "nameKo": "생태자연도",
+      "nameEn": "Ecological Naturalness Map",
+      "category": "ecology",
+      "enabled": true
+    },
+    {
+      "id": "17_lst",
+      "folder": "17_lst",
+      "nameKo": "지표온도 LST",
+      "nameEn": "Land Surface Temperature",
+      "category": "climate",
+      "enabled": true
+    },
+    {
+      "id": "18_population_grid",
+      "folder": "18_population_grid",
+      "nameKo": "격자인구",
+      "nameEn": "Grid Population",
+      "category": "urban",
+      "enabled": true
+    },
+    {
+      "id": "19_census_population_household",
+      "folder": "19_census_population_household",
+      "nameKo": "집계구·행정동 인구가구",
+      "nameEn": "Census and Administrative Population / Household",
+      "category": "urban",
+      "enabled": true
+    },
+    {
+      "id": "20_elevation",
+      "folder": "20_elevation",
+      "nameKo": "고도",
+      "nameEn": "Elevation",
+      "category": "terrain",
+      "enabled": true
+    },
+    {
+      "id": "21_slope",
+      "folder": "21_slope",
+      "nameKo": "경사",
+      "nameEn": "Slope",
+      "category": "terrain",
+      "enabled": true
+    },
+    {
+      "id": "22_aspect",
+      "folder": "22_aspect",
+      "nameKo": "향",
+      "nameEn": "Aspect",
+      "category": "terrain",
+      "enabled": true
+    },
+    {
+      "id": "23_park_green",
+      "folder": "23_park_green",
+      "nameKo": "녹지",
+      "nameEn": "Parks and Green Spaces",
+      "category": "green",
+      "enabled": true
+    },
+    {
+      "id": "24_landcover_major",
+      "folder": "24_landcover_major",
+      "nameKo": "토지피복도 대분류",
+      "nameEn": "Land Cover Major",
+      "category": "green",
+      "enabled": true
+    },
+    {
+      "id": "25_ecology",
+      "folder": "25_ecology",
+      "nameKo": "생태자연도",
+      "nameEn": "Ecological Naturalness Map",
+      "category": "green",
+      "enabled": true
+    },
+    {
+      "id": "26_river",
+      "folder": "26_river",
+      "nameKo": "하천",
+      "nameEn": "River",
+      "category": "water",
+      "enabled": true
+    },
+    {
+      "id": "27_drainage_grade",
+      "folder": "27_drainage_grade",
+      "nameKo": "배수등급도",
+      "nameEn": "Drainage Grade",
+      "category": "water",
+      "enabled": true
+    }
+  ]
+}

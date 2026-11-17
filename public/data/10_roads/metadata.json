@@ -1,0 +1,18 @@
+{
+  "id": "10_roads",
+  "folder": "10_roads",
+  "nameKo": "도로",
+  "nameEn": "Roads",
+  "description": "도로 중심선 또는 도로 공간정보",
+  "category": "urban",
+  "geometryType": "LineString/Polygon",
+  "mapFile": "layer.geojson",
+  "styleFile": "style.json",
+  "sourceMode": "DEMO",
+  "analysisType": "Length/Area",
+  "valueField": "DN",
+  "labelField": "DN",
+  "unit": null,
+  "sourceLayer": null,
+  "dataType": "vector"
+}

@@ -1,0 +1,7 @@
+# Only esbuild needs its platform binary installation check.
+allowBuilds:
+  esbuild: true
+  '@google/genai': false
+  core-js: false
+  es5-ext: false
+  protobufjs: false

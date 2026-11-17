@@ -1,0 +1,51 @@
+{
+  "configured": true,
+  "field": "DN",
+  "type": "range",
+  "classes": [
+    {
+      "max": 1,
+      "includeMax": false,
+      "label": "무인구 (0명)",
+      "color": "#f8f9fa"
+    },
+    {
+      "min": 1,
+      "includeMin": true,
+      "max": 25,
+      "includeMax": true,
+      "label": "매우 낮음 (1-25명)",
+      "color": "#f4c75f"
+    },
+    {
+      "min": 26,
+      "includeMin": true,
+      "max": 50,
+      "includeMax": true,
+      "label": "낮음 (26-50명)",
+      "color": "#ef8a40"
+    },
+    {
+      "min": 51,
+      "includeMin": true,
+      "max": 100,
+      "includeMax": true,
+      "label": "보통 (51-100명)",
+      "color": "#e13e24"
+    },
+    {
+      "min": 101,
+      "includeMin": true,
+      "max": 200,
+      "includeMax": true,
+      "label": "높음 (101-200명)",
+      "color": "#b12028"
+    },
+    {
+      "min": 201,
+      "includeMin": true,
+      "label": "매우 높음 (201명 이상)",
+      "color": "#7a111a"
+    }
+  ]
+}

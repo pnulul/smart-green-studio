@@ -1,0 +1,15 @@
+{
+  "id": "23_park_green",
+  "folder": "23_park_green",
+  "nameKo": "녹지",
+  "nameEn": "Parks and Green Spaces",
+  "category": "green",
+  "geometryType": "MultiPolygon",
+  "mapFile": "layer.geojson",
+  "styleFile": "style.json",
+  "sourceMode": "REAL",
+  "analysisType": "Sum/Average",
+  "valueField": "DN",
+  "labelField": "DN",
+  "dataType": "vector"
+}

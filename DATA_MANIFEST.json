@@ -1,0 +1,95 @@
+{
+  "vectorCompression": "gzip, lossless; decompressed SHA-256 matched original source",
+  "files": [
+    {
+      "path": "public/data/01_buildings/layer.geojson.gz",
+      "bytes": 49185069,
+      "sha256": "6c75f89c42e7fc19d65d05d082070ceb3e2f3d2c99983751f38741cf14b6c31e",
+      "uncompressedBytes": 205588137
+    },
+    {
+      "path": "public/data/02_building_use/layer.geojson.gz",
+      "bytes": 49738158,
+      "sha256": "1e55ab35b04ebf2d03fd8e339ee9f0e45ac45923907bfa2fabb66b27c4bb6575",
+      "uncompressedBytes": 222082710
+    },
+    {
+      "path": "public/data/03_completion_year/layer.geojson.gz",
+      "bytes": 49875323,
+      "sha256": "e4a9a6eb2c587e89e76bab3e7f26cd2ea8170f2c7ed68b8700750d40bf7b2a8f",
+      "uncompressedBytes": 210786811
+    },
+    {
+      "path": "public/data/04_highrise/layer.geojson.gz",
+      "bytes": 415118,
+      "sha256": "30d8512f96517949bd8df65ef1782991611ff69ec15b9476e08763e763ac3a25",
+      "uncompressedBytes": 2186480
+    },
+    {
+      "path": "public/data/05_lowrise/layer.geojson.gz",
+      "bytes": 3741146,
+      "sha256": "813f08a68ae4a310c9f0a2b61521a5a0b14fb29e40c6baff6021b48df2ffff8d",
+      "uncompressedBytes": 23910104
+    },
+    {
+      "path": "public/data/06_zoning/layer.geojson.gz",
+      "bytes": 6696566,
+      "sha256": "b90becf0254649f87de1d9ed7f5c2ff32d684e40c9e4f1647a7c364a5d6d88b2",
+      "uncompressedBytes": 20095143
+    },
+    {
+      "path": "public/data/07_green_park_river/layer.geojson.gz",
+      "bytes": 65,
+      "sha256": "f8759efd8937c709748ed3f0ef80c304de43a5010b1e6eac3d399faa40adf132",
+      "uncompressedBytes": 52
+    },
+    {
+      "path": "public/data/08_district_zone/layer.geojson.gz",
+      "bytes": 531791,
+      "sha256": "101f7a89298fe4a048a202a6aa91c83e5a1f93639c675a1dd02ab67fae813bfe",
+      "uncompressedBytes": 1610278
+    },
+    {
+      "path": "public/data/10_roads/layer.geojson.gz",
+      "bytes": 787646,
+      "sha256": "8b86e2274aa01614f5e76537cf39b277644743738656ebe5655d077790e742bf",
+      "uncompressedBytes": 5536492
+    },
+    {
+      "path": "public/data/11_transit/layer.geojson.gz",
+      "bytes": 153209,
+      "sha256": "ea5d1676e93aaf53065b8f8f861969a5f1a37b09995aa56e18f2522aa5e862c2",
+      "uncompressedBytes": 1466332
+    },
+    {
+      "path": "public/data/15_ecology/layer.geojson.gz",
+      "bytes": 164063,
+      "sha256": "3833c020cfb1d1e87b0faef2ccc68a9ae0144f4d68199881d17ecff7b16afe52",
+      "uncompressedBytes": 601346
+    },
+    {
+      "path": "public/data/19_census_population_household/layer.geojson.gz",
+      "bytes": 65,
+      "sha256": "f8759efd8937c709748ed3f0ef80c304de43a5010b1e6eac3d399faa40adf132",
+      "uncompressedBytes": 52
+    },
+    {
+      "path": "public/data/23_park_green/layer.geojson.gz",
+      "bytes": 4808161,
+      "sha256": "df302b8a3b3b729d90439e89497e561867f8fd24c9394a409ef811b392e6afb5",
+      "uncompressedBytes": 15161197
+    },
+    {
+      "path": "public/data/26_river/layer.geojson.gz",
+      "bytes": 2418210,
+      "sha256": "1137372fa903032c65f0678331b85e24e482a4f31b7293be39a04ecef760432d",
+      "uncompressedBytes": 7246386
+    },
+    {
+      "path": "public/data/27_drainage_grade/layer.geojson.gz",
+      "bytes": 6233412,
+      "sha256": "2354e5a2e8fc79d977914133997ef4f5f4cabf8082b75b69e3a195cb8b146010",
+      "uncompressedBytes": 19173625
+    }
+  ]
+}

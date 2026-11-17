@@ -1,0 +1,18 @@
+{
+  "id": "02_building_use",
+  "folder": "02_building_use",
+  "nameKo": "건축물 용도",
+  "nameEn": "Building Use",
+  "description": "주거, 상업, 업무, 교육, 문화 등 건축물의 주용도",
+  "category": "urban",
+  "geometryType": "Polygon",
+  "mapFile": "layer.geojson",
+  "styleFile": "style.json",
+  "sourceMode": "DEMO",
+  "analysisType": "Area/Ratio",
+  "valueField": "building_use",
+  "labelField": "building_use",
+  "unit": null,
+  "sourceLayer": "01_buildings",
+  "dataType": "vector"
+}

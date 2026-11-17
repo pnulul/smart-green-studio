@@ -1,0 +1,13 @@
+node_modules/
+build/
+dist/
+coverage/
+.prepared-public/
+dist-pages/
+data/logs/
+public/**/*.geojson
+*.tmp
+.DS_Store
+*.log
+.env*
+!.env.example

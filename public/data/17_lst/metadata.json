@@ -1,0 +1,19 @@
+{
+  "id": "17_lst",
+  "folder": "17_lst",
+  "nameKo": "지표온도 LST",
+  "nameEn": "Land Surface Temperature",
+  "description": "지표면온도 및 열환경 분석 (LST)",
+  "category": "climate",
+  "geometryType": "Raster",
+  "mapFile": "layer.tif",
+  "styleFile": "style.json",
+  "sourceMode": "REAL",
+  "analysisType": "Average",
+  "valueField": "DN",
+  "labelField": "DN",
+  "unit": "°C",
+  "sourceLayer": null,
+  "dataType": "raster",
+  "noDataValues": [0]
+}

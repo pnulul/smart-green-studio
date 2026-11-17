@@ -1,0 +1,16 @@
+{
+  "id": "22_aspect",
+  "folder": "22_aspect",
+  "nameKo": "향",
+  "nameEn": "Aspect",
+  "category": "terrain",
+  "geometryType": "Raster",
+  "mapFile": "layer.tif",
+  "styleFile": "style.json",
+  "sourceMode": "REAL",
+  "analysisType": "Categorical",
+  "valueField": "pixel",
+  "labelField": "pixel",
+  "dataType": "raster",
+  "unit": "°"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "04_highrise",
+  "folder": "04_highrise",
+  "nameKo": "고층건물",
+  "nameEn": "High-rise Buildings",
+  "description": "설정된 층수 또는 높이 기준 이상의 고층 건축물",
+  "category": "urban",
+  "geometryType": "Polygon",
+  "mapFile": "layer.geojson",
+  "styleFile": "style.json",
+  "sourceMode": "DEMO",
+  "analysisType": "Count/Density",
+  "valueField": "DN",
+  "labelField": "DN",
+  "unit": null,
+  "sourceLayer": "01_buildings",
+  "dataType": "vector"
+}

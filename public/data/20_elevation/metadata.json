@@ -1,0 +1,16 @@
+{
+  "id": "20_elevation",
+  "folder": "20_elevation",
+  "nameKo": "고도",
+  "nameEn": "Elevation",
+  "category": "terrain",
+  "geometryType": "Raster",
+  "mapFile": "layer.tif",
+  "styleFile": "style.json",
+  "sourceMode": "REAL",
+  "analysisType": "Average",
+  "valueField": "pixel",
+  "labelField": "pixel",
+  "dataType": "raster",
+  "unit": "m"
+}

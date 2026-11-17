@@ -1,0 +1,27 @@
+{
+  "configured": true,
+  "field": "DN",
+  "type": "category",
+  "classes": [
+    {
+      "value": "공원녹지(지정)",
+      "label": "공원녹지(지정)",
+      "color": "#7ac943"
+    },
+    {
+      "value": "그 밖의 녹지",
+      "label": "그 밖의 녹지",
+      "color": "#c3e6a4"
+    },
+    {
+      "value": "하천",
+      "label": "하천",
+      "color": "#8ecae6"
+    },
+    {
+      "value": "바다",
+      "label": "바다",
+      "color": "#5fa8d3"
+    }
+  ]
+}

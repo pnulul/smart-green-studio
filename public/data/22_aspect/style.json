@@ -1,0 +1,17 @@
+{
+  "configured": true,
+  "type": "raster",
+  "opacity": 0.8,
+  "classes": [
+    { "value": -1, "color": "#B0B0B0", "label": "평지" },
+    { "min": 0, "max": 22.5, "includeMin": true, "includeMax": false, "color": "#FF0000", "label": "북" },
+    { "min": 337.5, "max": 360, "includeMin": true, "includeMax": true, "color": "#FF0000", "label": "북" },
+    { "min": 22.5, "max": 67.5, "includeMin": true, "includeMax": false, "color": "#FFA600", "label": "북동" },
+    { "min": 67.5, "max": 112.5, "includeMin": true, "includeMax": false, "color": "#FFFF00", "label": "동" },
+    { "min": 112.5, "max": 157.5, "includeMin": true, "includeMax": false, "color": "#00FF00", "label": "남동" },
+    { "min": 157.5, "max": 202.5, "includeMin": true, "includeMax": false, "color": "#00FFFF", "label": "남" },
+    { "min": 202.5, "max": 247.5, "includeMin": true, "includeMax": false, "color": "#00A6FF", "label": "남서" },
+    { "min": 247.5, "max": 292.5, "includeMin": true, "includeMax": false, "color": "#0000FF", "label": "서" },
+    { "min": 292.5, "max": 337.5, "includeMin": true, "includeMax": false, "color": "#FF00FF", "label": "북서" }
+  ]
+}

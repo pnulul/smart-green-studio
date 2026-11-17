@@ -1,0 +1,364 @@
+@import "tailwindcss";
+
+/* ================================================================
+   Smart Green Studio — 색상 통일 + 반투명 패널
+   이 파일 하나만 교체합니다. 컴포넌트는 건드리지 않습니다.
+   ================================================================ */
+
+:root {
+  /* ▼▼▼ 패널 밝기 조절 — 여기 5줄만 고치면 전체가 따라옵니다 ▼▼▼ */
+  --layer-0: rgba(255,255,255,0.035);   /* 섹션 래퍼 */
+  --layer-1: rgba(255,255,255,0.055);
+  --layer-2: rgba(255,255,255,0.080);   /* 카드 — 가장 많이 보이는 층 */
+  --layer-3: rgba(255,255,255,0.105);   /* 호버·선택 */
+  --layer-4: rgba(255,255,255,0.140);   /* 모달·팝오버 */
+
+  --edge:        rgba(255,255,255,0.11);
+  --edge-strong: rgba(255,255,255,0.16);
+  /* ▲▲▲ 여기까지 ▲▲▲ */
+
+  --canvas: #0A0E13;
+  --ink-1: #E8EDF2;
+  --ink-2: #93A0AC;
+  --ink-3: #5D6975;
+  --accent: #35C6E8;
+  --accent-dim: #1B6E80;
+  --warn:   #E9743A;
+  --danger: #E0483C;
+
+  /* 시스템 토큰 호환 매핑 */
+  --bg-void: #080B0F;
+  --bg-canvas: #0A0E13;
+  --bg-panel: var(--layer-1);
+  --surface-1: var(--layer-2);
+  --surface-2: var(--layer-3);
+  --border-hair: var(--edge);
+  --divider: var(--edge);
+  --text-1: var(--ink-1);
+  --text-2: var(--ink-2);
+  --text-3: var(--ink-3);
+  --data-neutral: rgba(255,255,255,0.18);
+
+  --cat-1: #35C6E8;
+  --cat-2: rgba(53,198,232,0.68);
+  --cat-3: rgba(53,198,232,0.42);
+  --cat-4: rgba(53,198,232,0.24);
+  --cat-5: rgba(255,255,255,0.16);
+}
+
+@theme {
+  /* 중립 — 배경·패널·보더·본문 */
+  --color-slate-50: #E8EDF2; --color-slate-100: #D2DAE1; --color-slate-200: #B4BEC8; --color-slate-300: #A8B2BC; --color-slate-400: #93A0AC; --color-slate-500: #5D6975; --color-slate-600: #48525C; --color-slate-700: #343D46; --color-slate-800: #232B33; --color-slate-900: #10151C; --color-slate-950: #0A0E13;
+  --color-gray-50: #E8EDF2; --color-gray-100: #D2DAE1; --color-gray-200: #B4BEC8; --color-gray-300: #93A0AC; --color-gray-400: #7B8792; --color-gray-500: #5D6975; --color-gray-600: #48525C; --color-gray-700: #343D46; --color-gray-800: #232B33; --color-gray-900: #10151C; --color-gray-950: #0A0E13;
+  --color-zinc-50: #E8EDF2; --color-zinc-100: #D2DAE1; --color-zinc-200: #B4BEC8; --color-zinc-300: #93A0AC; --color-zinc-400: #7B8792; --color-zinc-500: #5D6975; --color-zinc-600: #48525C; --color-zinc-700: #343D46; --color-zinc-800: #232B33; --color-zinc-900: #10151C; --color-zinc-950: #0A0E13;
+  --color-neutral-50: #E8EDF2; --color-neutral-100: #D2DAE1; --color-neutral-200: #B4BEC8; --color-neutral-300: #93A0AC; --color-neutral-400: #7B8792; --color-neutral-500: #5D6975; --color-neutral-600: #48525C; --color-neutral-700: #343D46; --color-neutral-800: #232B33; --color-neutral-900: #10151C; --color-neutral-950: #0A0E13;
+  --color-stone-50: #E8EDF2; --color-stone-100: #D2DAE1; --color-stone-200: #B4BEC8; --color-stone-300: #93A0AC; --color-stone-400: #7B8792; --color-stone-500: #5D6975; --color-stone-600: #48525C; --color-stone-700: #343D46; --color-stone-800: #232B33; --color-stone-900: #10151C; --color-stone-950: #0A0E13;
+  --color-emerald-50: #E8EDF2; --color-emerald-100: #D2DAE1; --color-emerald-200: #B4BEC8; --color-emerald-300: #93A0AC; --color-emerald-400: #7B8792; --color-emerald-500: #5D6975; --color-emerald-600: #48525C; --color-emerald-700: #343D46; --color-emerald-800: #232B33; --color-emerald-900: #10151C; --color-emerald-950: #0A0E13;
+  --color-teal-50: #E8EDF2; --color-teal-100: #D2DAE1; --color-teal-200: #B4BEC8; --color-teal-300: #93A0AC; --color-teal-400: #7B8792; --color-teal-500: #5D6975; --color-teal-600: #48525C; --color-teal-700: #343D46; --color-teal-800: #232B33; --color-teal-900: #10151C; --color-teal-950: #0A0E13;
+  --color-green-50: #E8EDF2; --color-green-100: #D2DAE1; --color-green-200: #B4BEC8; --color-green-300: #93A0AC; --color-green-400: #7B8792; --color-green-500: #5D6975; --color-green-600: #48525C; --color-green-700: #343D46; --color-green-800: #232B33; --color-green-900: #10151C; --color-green-950: #0A0E13;
+  --color-lime-50: #E8EDF2; --color-lime-100: #D2DAE1; --color-lime-200: #B4BEC8; --color-lime-300: #93A0AC; --color-lime-400: #7B8792; --color-lime-500: #5D6975; --color-lime-600: #48525C; --color-lime-700: #343D46; --color-lime-800: #232B33; --color-lime-900: #10151C; --color-lime-950: #0A0E13;
+  --color-indigo-50: #E8EDF2; --color-indigo-100: #D2DAE1; --color-indigo-200: #B4BEC8; --color-indigo-300: #93A0AC; --color-indigo-400: #7B8792; --color-indigo-500: #5D6975; --color-indigo-600: #48525C; --color-indigo-700: #343D46; --color-indigo-800: #232B33; --color-indigo-900: #10151C; --color-indigo-950: #0A0E13;
+  --color-violet-50: #E8EDF2; --color-violet-100: #D2DAE1; --color-violet-200: #B4BEC8; --color-violet-300: #93A0AC; --color-violet-400: #7B8792; --color-violet-500: #5D6975; --color-violet-600: #48525C; --color-violet-700: #343D46; --color-violet-800: #232B33; --color-violet-900: #10151C; --color-violet-950: #0A0E13;
+  --color-purple-50: #E8EDF2; --color-purple-100: #D2DAE1; --color-purple-200: #B4BEC8; --color-purple-300: #93A0AC; --color-purple-400: #7B8792; --color-purple-500: #5D6975; --color-purple-600: #48525C; --color-purple-700: #343D46; --color-purple-800: #232B33; --color-purple-900: #10151C; --color-purple-950: #0A0E13;
+  --color-fuchsia-50: #E8EDF2; --color-fuchsia-100: #D2DAE1; --color-fuchsia-200: #B4BEC8; --color-fuchsia-300: #93A0AC; --color-fuchsia-400: #7B8792; --color-fuchsia-500: #5D6975; --color-fuchsia-600: #48525C; --color-fuchsia-700: #343D46; --color-fuchsia-800: #232B33; --color-fuchsia-900: #10151C; --color-fuchsia-950: #0A0E13;
+  --color-blue-50: #E8EDF2; --color-blue-100: #D2DAE1; --color-blue-200: #B4BEC8; --color-blue-300: #93A0AC; --color-blue-400: #7B8792; --color-blue-500: #5D6975; --color-blue-600: #48525C; --color-blue-700: #343D46; --color-blue-800: #232B33; --color-blue-900: #10151C; --color-blue-950: #0A0E13;
+
+  /* 액센트 시안 — 데이터·강조 */
+  --color-cyan-50: #E4F8FD; --color-cyan-100: #C3F0FA; --color-cyan-200: #97E5F6; --color-cyan-300: #6BD8F0; --color-cyan-400: #35C6E8; --color-cyan-500: #1FAECF; --color-cyan-600: #178DA9; --color-cyan-700: #146F86; --color-cyan-800: #14596C; --color-cyan-900: #123F4C; --color-cyan-950: #0A2732;
+  --color-sky-50: #E4F8FD; --color-sky-100: #C3F0FA; --color-sky-200: #97E5F6; --color-sky-300: #6BD8F0; --color-sky-400: #35C6E8; --color-sky-500: #1FAECF; --color-sky-600: #178DA9; --color-sky-700: #146F86; --color-sky-800: #14596C; --color-sky-900: #123F4C; --color-sky-950: #0A2732;
+
+  /* 경고 — 주의 상태값 */
+  --color-amber-50: #FDECE3; --color-amber-100: #FAD5C2; --color-amber-200: #F5B594; --color-amber-300: #EF9668; --color-amber-400: #E9743A; --color-amber-500: #D45C25; --color-amber-600: #AE471B; --color-amber-700: #8A3816; --color-amber-800: #6B2C13; --color-amber-900: #4B1F0F; --color-amber-950: #2B120A;
+  --color-yellow-50: #FDECE3; --color-yellow-100: #FAD5C2; --color-yellow-200: #F5B594; --color-yellow-300: #EF9668; --color-yellow-400: #E9743A; --color-yellow-500: #D45C25; --color-yellow-600: #AE471B; --color-yellow-700: #8A3816; --color-yellow-800: #6B2C13; --color-yellow-900: #4B1F0F; --color-yellow-950: #2B120A;
+  --color-orange-50: #FDECE3; --color-orange-100: #FAD5C2; --color-orange-200: #F5B594; --color-orange-300: #EF9668; --color-orange-400: #E9743A; --color-orange-500: #D45C25; --color-orange-600: #AE471B; --color-orange-700: #8A3816; --color-orange-800: #6B2C13; --color-orange-900: #4B1F0F; --color-orange-950: #2B120A;
+
+  /* 위험 — 경보 상태값 */
+  --color-red-50: #FCE9E7; --color-red-100: #F8CFCB; --color-red-200: #F1A9A2; --color-red-300: #E9827A; --color-red-400: #E0483C; --color-red-500: #C63A2F; --color-red-600: #A22E25; --color-red-700: #7E241D; --color-red-800: #601C17; --color-red-900: #431310; --color-red-950: #260B09;
+  --color-rose-50: #FCE9E7; --color-rose-100: #F8CFCB; --color-rose-200: #F1A9A2; --color-rose-300: #E9827A; --color-rose-400: #E0483C; --color-rose-500: #C63A2F; --color-rose-600: #A22E25; --color-rose-700: #7E241D; --color-rose-800: #601C17; --color-rose-900: #431310; --color-rose-950: #260B09;
+  --color-pink-50: #FCE9E7; --color-pink-100: #F8CFCB; --color-pink-200: #F1A9A2; --color-pink-300: #E9827A; --color-pink-400: #E0483C; --color-pink-500: #C63A2F; --color-pink-600: #A22E25; --color-pink-700: #7E241D; --color-pink-800: #601C17; --color-pink-900: #431310; --color-pink-950: #260B09;
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  /* 어두운 캔버스는 html 이 담당합니다. body 는 클래스가 붙어 있어
+     여기서 잡지 않으면 반투명 규칙에 먹힙니다. */
+  html {
+    background-color: var(--canvas);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", "Inter", system-ui, sans-serif;
+    color: var(--ink-1);
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 55% at 62% 32%, rgba(150,185,215,0.15), transparent 62%),
+      radial-gradient(ellipse 50% 40% at 18% 88%, rgba(53,198,232,0.07), transparent 70%);
+  }
+}
+
+/* Base Utility Classes */
+.panel {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-hair);
+}
+
+.card {
+  background-color: var(--surface-1);
+  border: 1px solid var(--border-hair);
+  border-radius: 8px;
+}
+
+.label-ko {
+  color: var(--text-2);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.metric {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: var(--text-1);
+  font-weight: 600;
+}
+
+.ghost-btn {
+  background-color: transparent;
+  color: var(--text-2);
+  border: 1px solid var(--border-hair);
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.ghost-btn:hover {
+  background-color: var(--surface-1);
+  color: var(--text-1);
+  border-color: var(--border-hair);
+}
+
+.bg-glow {
+  background-image: radial-gradient(circle at 50% 0%, rgba(53, 198, 232, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@layer utilities {
+  /* --- slate 계열 배경: 투명도 단계로 --- */
+  [class*="bg-slate-"] { background-color: var(--layer-2) !important; }
+  [class*="bg-slate-8"], [class*="bg-slate-9"] { background-color: var(--layer-0) !important; }
+
+  /* --- 남아 있는 흰 카드 30여 곳 --- */
+  [class*="bg-white"] { background-color: var(--layer-2) !important; }
+
+  /* --- 보더: /90 같은 투명도 변형까지 --- */
+  [class*="border-slate-"] { border-color: var(--edge) !important; }
+
+  /* --- 밝은 칩 위의 어두운 글씨 --- */
+  .text-slate-700, .text-slate-800, .text-slate-900, .text-slate-950 {
+    color: var(--ink-2) !important;
+  }
+
+  /* --- 불투명 hex 배경 -> 반투명 레이어 --- */
+  .bg-\[\#0b101c\] { background-color: var(--layer-1) !important; }
+  .bg-\[\#0c101d\] { background-color: var(--layer-1) !important; }
+  .bg-\[\#0e1424\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#11141d\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#0f1526\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#101626\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#101728\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#141822\]\/90 { background-color: var(--layer-2) !important; }
+  .bg-\[\#151822\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#12182b\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#161922\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#161a25\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#171a24\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#141b2e\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#171b26\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#181c27\] { background-color: var(--layer-2) !important; }
+  .bg-\[\#151c30\]\/90 { background-color: var(--layer-2) !important; }
+  .bg-\[\#191d28\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#161e33\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#191e2b\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#161f36\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#1b1f2b\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#162038\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#1a202d\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#1b212f\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#182138\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#162238\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#18223c\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#1d2230\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#1a233b\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#1e2330\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#1b243d\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#1b253f\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#1c263e\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#202636\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#202737\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#1b2746\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#222837\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#1f2942\] { background-color: var(--layer-3) !important; }
+  .bg-\[\#232938\]\/90 { background-color: var(--layer-4) !important; }
+  .bg-\[\#1f2a47\] { background-color: var(--layer-4) !important; }
+  .bg-\[\#242b3b\] { background-color: var(--layer-4) !important; }
+  .bg-\[\#1f2b4c\] { background-color: var(--layer-4) !important; }
+  .bg-\[\#202c4b\] { background-color: var(--layer-4) !important; }
+  .bg-\[\#1f2c4e\] { background-color: var(--layer-4) !important; }
+  .bg-\[\#202d4f\] { background-color: var(--layer-4) !important; }
+  .bg-\[\#262d3e\] { background-color: var(--layer-4) !important; }
+  .bg-\[\#222e4d\] { background-color: var(--layer-4) !important; }
+  .bg-\[\#282f42\] { background-color: var(--layer-4) !important; }
+  .bg-\[\#253150\] { background-color: var(--layer-4) !important; }
+  .bg-\[\#323b52\] { background-color: var(--layer-4) !important; }
+
+  /* --- 보더: 헤어라인 --- */
+  .border-\[\#1a233b\] { border-color: var(--edge) !important; }
+  .border-\[\#202533\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#1c263f\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#232936\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#1e2945\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#232a3a\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#1f2a47\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#202b46\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#242b3b\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#212c49\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#262c3b\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#212d4a\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#222e4d\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#222f4e\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#232f4e\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#282f42\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#273043\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#233152\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#293245\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#2a3243\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#2a3244\]\/80 { border-color: var(--edge-strong) !important; }
+  .border-\[\#2a3245\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#2a3346\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#253457\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#273456\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#263558\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#273558\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#2d3548\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#2d3648\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#27365c\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#27375e\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#2e374a\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#28375c\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#2e374c\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#2a375a\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#28385d\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#2d3b5e\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#333d52\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#343e54\] { border-color: var(--edge-strong) !important; }
+  .border-\[\#343e56\] { border-color: var(--edge-strong) !important; }
+
+  /* --- from --- */
+  .from-\[\#242c3d\] { --tw-gradient-from: #5D6975 !important; }
+
+  /* --- to --- */
+  .to-\[\#12151e\] { --tw-gradient-to: #5D6975 !important; }
+
+  /* --- 예외: 이 둘은 레이어가 아니라 캔버스입니다 --- */
+  body[class] {
+    background-color: transparent !important;
+    color: var(--ink-1) !important;
+  }
+  .bg-\[\#11141d\], .bg-\[\#0c101d\], .bg-\[\#0b101c\] {
+    background-color: transparent !important;
+  }
+
+  /* ================================================================
+     아이콘 정리 — 현재 199개. 아래 3단계 중 원하는 만큼만 남기세요.
+     :only-child 조건이 핵심입니다. 아이콘만 들어있는 버튼은
+     자식이 하나뿐이라 살아남고, 글자 옆 장식 아이콘만 사라집니다.
+     ================================================================ */
+
+  /* [1단계] 라벨 옆 잔아이콘 91개 — 기본 적용 */
+  svg.w-3:not(:only-child),
+  svg.w-3\.5:not(:only-child) {
+    display: none !important;
+  }
+
+  /* 남기는 아이콘의 존재감은 낮춥니다 */
+  svg.w-5, svg.w-6, svg.w-7, svg.w-8 {
+    stroke-width: 1.25 !important;
+  }
+
+  /* --- 유리질감 (스크롤이 버벅이면 이 블록만 지우세요) --- */
+  [class*="bg-slate-"], [class*="bg-white"], [class*="bg-\[\#"] {
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+  }
+
+  .shadow-xs, .shadow-sm, .shadow-lg, .shadow-xl, .shadow-2xl {
+    box-shadow: 0 18px 40px -18px rgba(0,0,0,0.75) !important;
+  }
+}
+
+/* ---------------- Leaflet ---------------- */
+.leaflet-container {
+  font-family: inherit;
+  background-color: var(--canvas) !important;
+  z-index: 1;
+  width: 100% !important;
+  height: 100% !important;
+}
+.leaflet-tile { filter: brightness(0.85) contrast(1.05) saturate(0.6); }
+
+.leaflet-popup-content-wrapper {
+  background: rgba(28,35,44,0.88) !important;
+  backdrop-filter: blur(14px);
+  color: var(--ink-1) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 20px 35px -12px rgba(0,0,0,0.8) !important;
+  border: 1px solid var(--edge) !important;
+  padding: 4px !important;
+}
+.leaflet-popup-content { margin: 12px 14px !important; line-height: 1.45 !important; color: var(--ink-2) !important; }
+.leaflet-popup-tip { background: rgba(28,35,44,0.88) !important; box-shadow: none !important; }
+.leaflet-popup-close-button { color: var(--ink-3) !important; padding: 8px !important; }
+.leaflet-popup-close-button:hover { color: var(--ink-1) !important; }
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.95); opacity: 0.8; }
+  50%  { transform: scale(1.4);  opacity: 0.2; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+.animate-pulse-ring { animation: pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite; }
+
+.custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.16); border-radius: 9999px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.26); }
+
+@media print {
+  html, body { background: #ffffff !important; color: #000000 !important; }
+  body::before { display: none !important; }
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  .page-break { page-break-before: always; }
+  #map-container { height: 450px !important; page-break-inside: avoid; }
+}
+
+/* Keep reports and dialogs readable independently of the studio's dark theme. */
+.ai-report-root, .ai-report-root .print-container, .sgs-report-dialog {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.ai-report-root [class*="bg-slate-"], .sgs-report-dialog [class*="bg-slate-"] {
+  background-color: #f1f5f9 !important;
+  backdrop-filter: none !important;
+}
+.ai-report-root [class*="bg-white"], .sgs-report-dialog [class*="bg-white"] { background: #ffffff !important; }
+.ai-report-root [class*="text-slate-"], .sgs-report-dialog [class*="text-slate-"] { color: #334155 !important; }
+.ai-report-root h1, .ai-report-root h2, .ai-report-root h3, .ai-report-root h4 { color: #0f172a !important; }
+.sgs-report-dialog input { accent-color: #4f46e5; }

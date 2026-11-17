@@ -1,0 +1,14 @@
+{
+  "configured": true,
+  "type": "vector",
+  "fillOpacity": 0.6,
+  "weight": 2,
+  "color": "#3b82f6",
+  "classes": [
+    {
+      "value": null,
+      "label": "하천",
+      "color": "#3b82f6"
+    }
+  ]
+}

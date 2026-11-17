@@ -1,0 +1,18 @@
+{
+  "id": "05_lowrise",
+  "folder": "05_lowrise",
+  "nameKo": "저층건물",
+  "nameEn": "Low-rise Buildings",
+  "description": "설정된 층수 또는 높이 기준 이하의 저층 건축물",
+  "category": "urban",
+  "geometryType": "Polygon",
+  "mapFile": "layer.geojson",
+  "styleFile": "style.json",
+  "sourceMode": "DEMO",
+  "analysisType": "Count/Density",
+  "valueField": "DN",
+  "labelField": "DN",
+  "unit": null,
+  "sourceLayer": "01_buildings",
+  "dataType": "vector"
+}

@@ -1,0 +1,13 @@
+{
+  "configured": true,
+  "field": "DN",
+  "type": "category",
+  "fillOpacity": 0.5,
+  "classes": [
+    {
+      "value": "생태자연도",
+      "label": "생태자연도",
+      "color": "#7ac943"
+    }
+  ]
+}

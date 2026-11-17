@@ -1,0 +1,12 @@
+{
+  "configured": true,
+  "field": "DN",
+  "type": "category",
+  "classes": [
+    {
+      "value": "건물",
+      "label": "건물",
+      "color": "#000000"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "configured": true,
+  "type": "vector",
+  "fillOpacity": 0.8,
+  "weight": 0,
+  "classes": [
+    {
+      "value": "매우양호",
+      "label": "매우양호",
+      "color": "#4DEEEA"
+    },
+    {
+      "value": "양호",
+      "label": "양호",
+      "color": "#55C4F5"
+    },
+    {
+      "value": "약간양호",
+      "label": "약간양호",
+      "color": "#009FE3"
+    },
+    {
+      "value": "약간불량",
+      "label": "약간불량",
+      "color": "#659BB9"
+    },
+    {
+      "value": "불량",
+      "label": "불량",
+      "color": "#307399"
+    },
+    {
+      "value": "매우불량",
+      "label": "매우불량",
+      "color": "#194F8A"
+    },
+    {
+      "value": "기타",
+      "label": "기타",
+      "color": "#FFFFFF"
+    }
+  ]
+}

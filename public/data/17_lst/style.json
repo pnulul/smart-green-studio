@@ -1,0 +1,56 @@
+{
+  "configured": true,
+  "field": "DN",
+  "classes": [
+    {
+      "value": 28,
+      "color": "#10b981",
+      "label": "28°C 이하 (양호/저온)"
+    },
+    {
+      "value": 29,
+      "color": "#34d399",
+      "label": "29°C"
+    },
+    {
+      "value": 30,
+      "color": "#6ee7b7",
+      "label": "30°C"
+    },
+    {
+      "value": 31,
+      "color": "#fde047",
+      "label": "31°C (보통)"
+    },
+    {
+      "value": 32,
+      "color": "#facc15",
+      "label": "32°C"
+    },
+    {
+      "value": 33,
+      "color": "#fb923c",
+      "label": "33°C (약간 높음)"
+    },
+    {
+      "value": 34,
+      "color": "#f97316",
+      "label": "34°C (열집중 주의)"
+    },
+    {
+      "value": 35,
+      "color": "#ef4444",
+      "label": "35°C (고온 경고)"
+    },
+    {
+      "value": 36,
+      "color": "#dc2626",
+      "label": "36°C (열섬 심각)"
+    },
+    {
+      "value": 37,
+      "color": "#991b1b",
+      "label": "37°C 이상 (초고온 위험)"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "configured": true,
+  "type": "vector",
+  "field": "DN",
+  "fillOpacity": 0.55,
+  "classes": [
+    { "value": 1, "label": "경관지구", "color": "#4CAF50" },
+    { "value": 2, "label": "미관지구", "color": "#26A69A" },
+    { "value": 3, "label": "고도지구", "color": "#FF9800" },
+    { "value": 4, "label": "방화지구", "color": "#E53935" },
+    { "value": 5, "label": "보호지구", "color": "#7E57C2" },
+    { "value": 6, "label": "취락지구", "color": "#8D6E63" },
+    { "value": 7, "label": "기타용도지구", "color": "#9E9E9E" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "configured": true,
+  "type": "raster",
+  "opacity": 0.8,
+  "classes": [
+    { "value": 1, "label": "시가화·건조지역", "color": "#ff0000" },
+    { "value": 2, "label": "농업지역", "color": "#ffff00" },
+    { "value": 3, "label": "산림지역", "color": "#008000" },
+    { "value": 4, "label": "초지", "color": "#7cfc00" },
+    { "value": 5, "label": "습지", "color": "#00bfff" },
+    { "value": 6, "label": "나지", "color": "#a0522d" },
+    { "value": 7, "label": "수역", "color": "#0000ff" }
+  ]
+}

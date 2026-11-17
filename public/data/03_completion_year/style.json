@@ -1,0 +1,56 @@
+{
+  "configured": true,
+  "field": "DN",
+  "type": "range",
+  "classes": [
+    {
+      "max": 1979,
+      "includeMax": true,
+      "label": "~ 1979",
+      "color": "#7c2d12"
+    },
+    {
+      "min": 1980,
+      "max": 1989,
+      "includeMin": true,
+      "includeMax": true,
+      "label": "1980년대",
+      "color": "#b34a35"
+    },
+    {
+      "min": 1990,
+      "max": 1999,
+      "includeMin": true,
+      "includeMax": true,
+      "label": "1990년대",
+      "color": "#d9714e"
+    },
+    {
+      "min": 2000,
+      "max": 2009,
+      "includeMin": true,
+      "includeMax": true,
+      "label": "2000년대",
+      "color": "#ee9d6f"
+    },
+    {
+      "min": 2010,
+      "max": 2019,
+      "includeMin": true,
+      "includeMax": true,
+      "label": "2010년대",
+      "color": "#f6c89f"
+    },
+    {
+      "min": 2020,
+      "includeMin": true,
+      "label": "2020 ~",
+      "color": "#fdeeda"
+    },
+    {
+      "value": "미상",
+      "label": "미상",
+      "color": "#ececec"
+    }
+  ]
+}
