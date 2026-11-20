@@ -11,7 +11,6 @@ import { saveAs } from 'file-saver';
 import { getClippedGeoJson, getMapPreview } from '../../utils/indexedDbUtils';
 import { localSpatialDataService } from '../../services/localSpatialDataService';
 import { MiniReportMap } from './MiniReportMap';
-import { LIGHT_BASEMAP, SATELLITE_BASEMAP } from '../../config/maps';
 
 interface AiReportViewProps {
   context: AnalysisContext;
@@ -21,8 +20,10 @@ interface AiReportViewProps {
 }
 
 const REPORT_BASEMAPS = [
-  { id: 'light', label: '흑백 지도 (기본)', url: LIGHT_BASEMAP.url },
-  { id: 'satellite', label: '항공·위성사진', url: SATELLITE_BASEMAP.url },
+  { id: 'osm', label: 'OSM Standard (기본)', url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png' },
+  { id: 'carto-light', label: 'CARTO Light', url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png' },
+  { id: 'carto-dark', label: 'CARTO Dark', url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' },
+  { id: 'carto-voyager', label: 'CARTO Voyager', url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png' },
   { id: 'google-road', label: 'Google Road', url: 'https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}' },
   { id: 'google-sat', label: 'Google Satellite', url: 'https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}' },
   { id: 'opentopo', label: 'OpenTopoMap', url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png' }

@@ -23,8 +23,6 @@ import {
   BufferShape,
 } from '../types';
 import { GeoJsonLayerPanel } from './GeoJsonLayerPanel';
-import { LIGHT_BASEMAP, SATELLITE_BASEMAP, STREET_BASEMAP } from '../config/maps';
-import { createBasemapLayer } from '../utils/basemapLayer';
 
 interface CenterMapProps {
   data: SiteAnalysisData;
@@ -74,12 +72,12 @@ export const CenterMap: React.FC<CenterMapProps> = ({
 
   const [activeBaseLayer, setActiveBaseLayer] = useState<
     'dark' | 'voyager' | 'osm' | 'googleRoad' | 'googleSat' | 'terrain'
-  >('googleSat');
+  >('osm');
   const [showLayerPanel, setShowLayerPanel] = useState(false);
   const [showPoiDrawer, setShowPoiDrawer] = useState(false);
   const [selectedPoiCategory, setSelectedPoiCategory] = useState<string>('ALL');
 
-  // Initialize Leaflet Map with satellite imagery and street-map alternatives.
+  // Initialize Leaflet Map with robust OSM / Carto / Google basemaps
   useEffect(() => {
     if (!mapContainerRef.current) return;
     if (mapInstanceRef.current) {
@@ -96,23 +94,32 @@ export const CenterMap: React.FC<CenterMapProps> = ({
       preferCanvas: true,
     });
 
-    // Use public OSM tiles for street styles; the former CARTO URL returns an API-key notice.
+    // 1. CartoDB Dark Matter (High-contrast Dark OSM Basemap)
     const layerDark = L.tileLayer(
-      STREET_BASEMAP.url,
+      'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
       {
-        ...STREET_BASEMAP.options,
-        className: 'sgs-dark-tile',
+        maxZoom: 20,
+        subdomains: 'abcd',
+        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
       }
     );
 
-    // Light street-map style.
-    const layerVoyager = createBasemapLayer(
-      LIGHT_BASEMAP.url,
-      LIGHT_BASEMAP.options
+    // 2. CartoDB Voyager (High-resolution Clean Basemap)
+    const layerVoyager = L.tileLayer(
+      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+      {
+        maxZoom: 20,
+        subdomains: 'abcd',
+        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+      }
     );
 
     // 3. OpenStreetMap Standard Tile Layer
-    const layerOsm = L.tileLayer(STREET_BASEMAP.url, STREET_BASEMAP.options);
+    const layerOsm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { crossOrigin: true,
+      maxZoom: 19,
+      subdomains: ['a', 'b', 'c'],
+      attribution: '&copy; OpenStreetMap contributors',
+    });
 
     // 4. Google Maps Standard Roadmap (Used when API key or public preview is available)
     const layerGoogleRoad = L.tileLayer(
@@ -120,10 +127,10 @@ export const CenterMap: React.FC<CenterMapProps> = ({
       { maxZoom: 20, attribution: '&copy; Google Maps' }
     );
 
-    // 5. Public satellite / aerial imagery, including CORS support for image exports.
+    // 5. Google Maps Satellite / Hybrid
     const layerGoogleSat = L.tileLayer(
-      SATELLITE_BASEMAP.url,
-      SATELLITE_BASEMAP.options
+      'https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
+      { maxZoom: 20, attribution: '&copy; Google Satellite' }
     );
 
     // 6. OpenTopoMap (Terrain)
@@ -143,14 +150,14 @@ export const CenterMap: React.FC<CenterMapProps> = ({
       terrain: layerTerrain,
     };
 
-    layerGoogleSat.addTo(map);
-    setActiveBaseLayer('googleSat');
+    layerOsm.addTo(map);
+    setActiveBaseLayer('osm');
 
     L.control
       .attribution({
         position: 'bottomright',
         prefix:
-          '<span class="text-[9px] text-[var(--text-3)] font-mono">Smart Green Studio</span>',
+          '<span class="text-[9px] text-[var(--text-3)] font-mono">Smart Green Studio &copy; OSM &copy; CARTO &copy; Google Maps</span>',
       })
       .addTo(map);
 
@@ -662,9 +669,9 @@ export const CenterMap: React.FC<CenterMapProps> = ({
                 ? 'bg-[var(--surface-2)] text-[var(--accent)] border border-[var(--accent-dim)] font-bold'
                 : 'text-[var(--text-2)] hover:text-[var(--text-1)] hover:bg-[var(--surface-1)]'
             }`}
-            title="흑백 배경지도 (OpenStreetMap)"
+            title="OpenStreetMap 기반 고해상도 베이스맵"
           >
-            흑백 지도
+            OSM 보야저
           </button>
           <button
             type="button"
@@ -701,7 +708,7 @@ export const CenterMap: React.FC<CenterMapProps> = ({
                 ? 'bg-[var(--surface-2)] text-[var(--accent)] border border-[var(--accent-dim)] font-bold'
                 : 'text-[var(--text-2)] hover:text-[var(--text-1)] hover:bg-[var(--surface-1)]'
             }`}
-            title="항공·위성사진 (Esri World Imagery)"
+            title={hasGoogleKey ? 'Google Maps 위성/하이브리드' : '항공/위성'}
           >
             <span>항공/위성</span>
           </button>
