@@ -61,11 +61,16 @@ export const ThematicAnalysisMap: React.FC<ThematicAnalysisMapProps> = ({
       mapInstance.current = map;
 
       // Clean dark-adapted base map with low opacity to emphasize thematic data
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      const cartoKey = import.meta.env.VITE_CARTO_BASEMAP_KEY?.trim();
+      const cartoUrl = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+        + (cartoKey ? `?key=${encodeURIComponent(cartoKey)}` : '');
+      L.tileLayer(cartoUrl, {
         crossOrigin: true,
         maxZoom: 19,
         opacity: 0.3,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions/">CARTO</a>',
       }).addTo(map);
+      L.control.attribution({ prefix: false }).addTo(map);
 
       L.control.zoom({ position: 'bottomright' }).addTo(map);
     }
