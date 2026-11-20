@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Newspaper, Search, ChevronRight, Hash, AlertCircle, RefreshCw, ExternalLink } from 'lucide-react';
 import { SiteAnalysisData } from '../types';
 import { googleSearchService, GoogleSearchItem } from '../services/googleSearchService';
@@ -24,6 +24,16 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<GoogleSearchItem[]>([]);
   const [searchError, setSearchError] = useState<string | null>(null);
+  const [hasSearched, setHasSearched] = useState(false);
+  const requestId = useRef(0);
+  useEffect(() => {
+    requestId.current++;
+    setSearchResults([]);
+    setSearchError(null);
+    setHasSearched(false);
+    setIsSearching(false);
+    onResultsChange?.([]);
+  }, [currentSite.lat, currentSite.lng]);
 
   const RECOMMENDED_KEYWORDS = [
     '도시개발',
@@ -38,11 +48,13 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
   const handleSearch = async (query: string = searchQuery) => {
     if (!query.trim()) return;
 
-    if (!googleSearchApiKey || !googleSearchEngineId) {
-      setSearchError('Google Custom Search API Key와 Search Engine ID가 필요합니다.');
+    if (!googleSearchService.isConfigured(googleSearchApiKey, googleSearchEngineId)) {
+      setSearchError('뉴스 검색 연결을 확인해 주세요.');
       return;
     }
 
+    const currentRequest = ++requestId.current;
+    setHasSearched(true);
     setIsSearching(true);
     const startTime = Date.now();
     loggerService.log(session?.studentId || 'unknown', 'NEWS_SEARCH', `검색어: ${query}`, {
@@ -51,9 +63,11 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
     });
     setSearchError(null);
     setSearchResults([]);
+    onResultsChange?.([]);
 
     try {
       const results = await googleSearchService.searchNews(query, googleSearchApiKey, googleSearchEngineId);
+      if (requestId.current !== currentRequest) return;
       setSearchResults(results);
       if (onResultsChange) onResultsChange(results);
       loggerService.log(session?.studentId || 'unknown', 'NEWS_SEARCH', `검색 완료: ${query}`, {
@@ -62,6 +76,7 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
         duration_ms: Date.now() - startTime
       });
     } catch (err: any) {
+      if (requestId.current !== currentRequest) return;
       setSearchError(err.message || '검색 중 오류가 발생했습니다.');
       loggerService.log(session?.studentId || 'unknown', 'NEWS_SEARCH', `검색 오류: ${err.message}`, {
         site_name: currentSite?.siteName,
@@ -69,12 +84,16 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
         duration_ms: Date.now() - startTime
       });
     } finally {
-      setIsSearching(false);
+      if (requestId.current === currentRequest) setIsSearching(false);
     }
   };
 
   const handleKeywordClick = (keyword: string) => {
-    const q = `${currentSite.address || currentSite.siteName} ${keyword}`;
+    const address = currentSite.address || currentSite.siteName;
+    const city = address.match(/([가-힣]+(?:특별자치시|특별시|광역시|도|시))/)?.[1]?.replace(/(특별자치시|특별시|광역시)$/, '') || '';
+    const district = address.match(/(?:^|\s)([가-힣]+(?:구|군))(?=\s|$)/)?.[1] || '';
+    const location = [city, district].filter(Boolean).join(' ') || currentSite.siteName;
+    const q = `${location} ${keyword.replace(/·/g, ' ')}`;
     setSearchQuery(q);
     handleSearch(q);
   };
@@ -113,6 +132,7 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
             </div>
             <input
               type="text"
+              maxLength={200}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -134,6 +154,7 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
               <button
                 data-usage-action="news-keyword"
                 key={keyword}
+                disabled={isSearching}
                 onClick={() => handleKeywordClick(keyword)}
                 className="px-3 py-1.5 rounded-full bg-[var(--surface-1)] hover:bg-[var(--surface-2)] border border-[var(--border-hair)] text-[11px] text-[var(--text-2)] hover:text-[var(--accent)] transition-colors flex items-center gap-1"
               >
@@ -157,7 +178,7 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
           {!isSearching && searchResults.length === 0 && !searchError && (
             <div className="col-span-1 md:col-span-2 lg:col-span-3 py-12 flex flex-col items-center justify-center border border-dashed border-[var(--border-hair)] rounded-2xl bg-[var(--surface-1)]/50">
               <p className="text-sm text-[var(--text-2)] text-center">
-                대상지 관련 뉴스를 검색하면<br/>이곳에 실제 결과가 표시됩니다.
+                {hasSearched ? '검색된 기사가 없습니다. 다른 검색어로 검색해 보세요.' : <>대상지 관련 뉴스를 검색하면<br/>이곳에 실제 결과가 표시됩니다.</>}
               </p>
             </div>
           )}
@@ -195,6 +216,7 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
                   <p className="text-xs text-[var(--text-3)] line-clamp-3 leading-relaxed">
                     {item.snippet}
                   </p>
+                  {(item.source || item.publishedAt) && <p className="text-[11px] text-[var(--text-3)] mt-2">{[item.source, item.publishedAt && new Date(item.publishedAt).toLocaleDateString('ko-KR')].filter(Boolean).join(' · ')}</p>}
                 </div>
                 <div className="mt-auto pt-2 flex items-center text-[10px] text-[var(--accent)] font-medium gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   기사 원문 보기 <ExternalLink className="w-3 h-3" />
