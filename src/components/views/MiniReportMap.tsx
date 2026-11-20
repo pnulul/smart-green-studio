@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState, useMemo } from 'react';
 import L from 'leaflet';
 import { spatialAnalyzer } from '../../services/spatialAnalyzer';
 import html2canvas from 'html2canvas';
+import { LIGHT_BASEMAP, basemapOptions } from '../../config/maps';
+import { createBasemapLayer } from '../../utils/basemapLayer';
 
 export const MiniReportMap: React.FC<{
   datasetId: string;
@@ -30,6 +32,8 @@ export const MiniReportMap: React.FC<{
     exportMapInstance.current?.remove();
     mapInstance.current = null;
     exportMapInstance.current = null;
+    basemapRef.current = null;
+    currentBasemapUrlRef.current = '';
   }, []);
 
   const geoJsonOptions = useMemo(() => {
@@ -135,66 +139,58 @@ export const MiniReportMap: React.FC<{
         keyboard: false,
         attributionControl: false
       });
+      L.control.attribution({ prefix: false }).addTo(mapInstance.current);
       /* Base map added dynamically */
     }
 
     const map = mapInstance.current;
         
     // Manage Base Map
-    const targetBasemapUrl = basemapUrl || 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-    if (!basemapRef.current) {
-      basemapRef.current = L.tileLayer(targetBasemapUrl, { crossOrigin: true }).addTo(map);
+    const targetBasemapUrl = basemapUrl || LIGHT_BASEMAP.url;
+    if (!basemapRef.current || !map.hasLayer(basemapRef.current)) {
+      basemapRef.current = createBasemapLayer(targetBasemapUrl, basemapOptions(targetBasemapUrl)).addTo(map);
       currentBasemapUrlRef.current = targetBasemapUrl;
     } else if (currentBasemapUrlRef.current !== targetBasemapUrl) {
-      basemapRef.current.setUrl(targetBasemapUrl);
+      map.removeLayer(basemapRef.current);
+      basemapRef.current = createBasemapLayer(targetBasemapUrl, basemapOptions(targetBasemapUrl)).addTo(map);
       currentBasemapUrlRef.current = targetBasemapUrl;
     }
 
     // Clear previous layers
     map.eachLayer((layer) => {
-      if (!(layer instanceof L.TileLayer)) {
+      if (layer !== basemapRef.current) {
         map.removeLayer(layer);
       }
     });
 
+    let bounds = L.latLngBounds([]);
+    let rasterUrl: string | null = null;
+    if (geoJson) {
+      bounds = L.geoJSON(geoJson, geoJsonOptions).addTo(map).getBounds();
+    } else if (rasterBlob && bbox) {
+      rasterUrl = URL.createObjectURL(rasterBlob);
+      bounds = L.latLngBounds([bbox[1], bbox[0]], [bbox[3], bbox[2]]);
+      L.imageOverlay(rasterUrl, bounds, { alt: '공간분석 결과' }).addTo(map);
+    }
+    if (targetGeometry) {
+      const targetBounds = L.geoJSON(targetGeometry).getBounds();
+      if (targetBounds.isValid()) bounds = targetBounds;
+    }
     const fitMapBounds = () => {
-      map.invalidateSize(true);
-      if (geoJson) {
-        const layer = L.geoJSON(geoJson, geoJsonOptions).addTo(map);
-        const bounds = layer.getBounds();
-        if (targetGeometry) {
-          const targetLayer = L.geoJSON(targetGeometry);
-          if (targetLayer.getBounds().isValid()) {
-             map.fitBounds(targetLayer.getBounds(), { padding: [24, 24], animate: false });
-          } else if (bounds.isValid()) {
-             map.fitBounds(bounds, { padding: [24, 24], animate: false });
-          }
-        } else if (bounds.isValid()) {
-          map.fitBounds(bounds, { padding: [24, 24], animate: false });
-        }
-      } else if (rasterBlob && bbox) {
-        const url = URL.createObjectURL(rasterBlob);
-        const bounds = L.latLngBounds(
-          [bbox[1], bbox[0]],
-          [bbox[3], bbox[2]]
-        );
-        L.imageOverlay(url, bounds).addTo(map);
-        
-        if (targetGeometry) {
-          const targetLayer = L.geoJSON(targetGeometry);
-          if (targetLayer.getBounds().isValid()) {
-             map.fitBounds(targetLayer.getBounds(), { padding: [24, 24], animate: false });
-          } else {
-             map.fitBounds(bounds, { padding: [24, 24], animate: false });
-          }
-        } else {
-          map.fitBounds(bounds, { padding: [24, 24], animate: false });
-        }
-      }
+      if (!mapRef.current?.clientWidth || !mapRef.current.clientHeight) return;
+      map.invalidateSize({ pan: false });
+      if (bounds.isValid()) map.fitBounds(bounds, { padding: [24, 24], animate: false });
     };
 
     // Delay slightly to ensure container has sized properly
-    setTimeout(fitMapBounds, 100);
+    const timer = setTimeout(fitMapBounds, 100);
+    const observer = new ResizeObserver(fitMapBounds);
+    observer.observe(mapRef.current);
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+      if (rasterUrl) URL.revokeObjectURL(rasterUrl);
+    };
 
   }, [geoJson, rasterBlob, bbox, basemapUrl, targetGeometry, geoJsonOptions]);
 
@@ -231,8 +227,11 @@ export const MiniReportMap: React.FC<{
         eMap.removeLayer(layer);
       });
       
-      const targetBasemapUrl = extBasemap || 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-      const tileLayer = L.tileLayer(targetBasemapUrl, { crossOrigin: true }).addTo(eMap);
+      const targetBasemapUrl = extBasemap || LIGHT_BASEMAP.url;
+      const tileLayer = createBasemapLayer(targetBasemapUrl, basemapOptions(targetBasemapUrl)).addTo(eMap);
+      L.control.attribution({ prefix: false }).addTo(eMap);
+      let rasterUrl: string | null = null;
+      let imageLoadPromise: Promise<void> = Promise.resolve();
       
       let boundsToFit = L.latLngBounds([]);
       
@@ -240,9 +239,14 @@ export const MiniReportMap: React.FC<{
         const layer = L.geoJSON(extGeoJson, extOptions).addTo(eMap);
         boundsToFit = layer.getBounds();
       } else if (extRaster && extBbox) {
-        const url = URL.createObjectURL(extRaster);
+        rasterUrl = URL.createObjectURL(extRaster);
         boundsToFit = L.latLngBounds([extBbox[1], extBbox[0]], [extBbox[3], extBbox[2]]);
-        L.imageOverlay(url, boundsToFit).addTo(eMap);
+        const overlay = L.imageOverlay(rasterUrl, boundsToFit);
+        imageLoadPromise = new Promise<void>((resolve, reject) => {
+          overlay.once('load', () => resolve());
+          overlay.once('error', () => reject(new Error('Analysis image failed to load')));
+        });
+        overlay.addTo(eMap);
       }
       
       eMap.invalidateSize(true);
@@ -268,12 +272,14 @@ export const MiniReportMap: React.FC<{
           }
         };
         tileLayer.on('load', done);
-        tileLayer.on('tileerror', done);
+        if (!tileLayer.isLoading()) done();
         setTimeout(done, 10000); // 10초 타임아웃
       });
 
-      tileLoadPromise.then(() => {
+      let cancelled = false;
+      Promise.all([tileLoadPromise, imageLoadPromise]).then(() => {
         requestAnimationFrame(() => {
+          if (cancelled) return;
           if (!exportMapContainerRef.current) {
             // @ts-ignore
             L.Browser.any3d = prevAny3d;
@@ -290,6 +296,7 @@ export const MiniReportMap: React.FC<{
             windowWidth: 1600,
             windowHeight: 1200
           }).then(canvas => {
+            if (cancelled) return;
             // @ts-ignore
             L.Browser.any3d = prevAny3d;
             const dataUrl = canvas.toDataURL('image/png');
@@ -302,6 +309,7 @@ export const MiniReportMap: React.FC<{
               exportMapInstance.current = null;
             }
           }).catch(err => {
+            if (cancelled) return;
             // @ts-ignore
             L.Browser.any3d = prevAny3d;
             console.error("Map capture error:", err);
@@ -312,7 +320,23 @@ export const MiniReportMap: React.FC<{
             }
           });
         });
-      }); 
+      }).catch(err => {
+        if (cancelled) return;
+        // @ts-ignore
+        L.Browser.any3d = prevAny3d;
+        console.error('Map image loading error:', err);
+        onReadyRef.current?.(datasetId, null);
+      });
+      return () => {
+        cancelled = true;
+        // @ts-ignore
+        L.Browser.any3d = prevAny3d;
+        if (rasterUrl) URL.revokeObjectURL(rasterUrl);
+        if (exportMapInstance.current === eMap) {
+          eMap.remove();
+          exportMapInstance.current = null;
+        }
+      };
     } else if (!isExporting) {
       setStaticImageUrl(null);
     }

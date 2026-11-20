@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Newspaper, Search, ChevronRight, Hash, AlertCircle, RefreshCw, ExternalLink, Settings } from 'lucide-react';
+import { Newspaper, Search, ChevronRight, Hash, AlertCircle, RefreshCw, ExternalLink } from 'lucide-react';
 import { SiteAnalysisData } from '../types';
 import { googleSearchService, GoogleSearchItem } from '../services/googleSearchService';
 import { loggerService } from '../services/loggerService';
@@ -10,7 +10,6 @@ interface NewsMonitorSectionProps {
   currentSite: SiteAnalysisData;
   googleSearchApiKey?: string;
   googleSearchEngineId?: string;
-  onOpenApiSettings: () => void;
   onResultsChange?: (results: GoogleSearchItem[]) => void;
 }
 
@@ -19,7 +18,6 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
   currentSite, 
   googleSearchApiKey, 
   googleSearchEngineId,
-  onOpenApiSettings,
   onResultsChange
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -104,18 +102,6 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
               <span className="text-xs font-semibold text-[var(--text-3)] uppercase tracking-wider">현재 대상지</span>
               <span className="text-sm font-bold text-[var(--accent)]">{currentSite.address || currentSite.siteName}</span>
             </div>
-            
-            {(!googleSearchApiKey || !googleSearchEngineId) && (
-              <button
-                data-usage-action="header-api-settings-btn"
-                onClick={onOpenApiSettings}
-                className="flex items-center gap-2 px-3 py-1.5 bg-[var(--surface-2)] hover:bg-[var(--surface-3)] border border-[var(--border-hair)] rounded-lg text-xs font-medium text-[var(--warn)] transition-colors"
-              >
-                <AlertCircle className="w-3.5 h-3.5" />
-                API 설정 필요
-                <Settings className="w-3 h-3 ml-1" />
-              </button>
-            )}
           </div>
         </div>
 

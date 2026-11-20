@@ -598,6 +598,7 @@ export const AnalysisTabsView: React.FC<AnalysisTabsViewProps> = ({ context, ana
     if (pipelineState !== 'COMPLETED' || !activeDatasetFolder) {
       setCurrentResult(null);
       setClippedGeoJson(null);
+      setCurrentRasterPreview(null);
       return;
     }
 
@@ -610,6 +611,7 @@ export const AnalysisTabsView: React.FC<AnalysisTabsViewProps> = ({ context, ana
     // Explicitly release previous large GeoJSON object from RAM
     setClippedGeoJson(null);
     setCurrentResult(null);
+    setCurrentRasterPreview(null);
 
     // Load from IndexedDB and metadata from service
     (async () => {

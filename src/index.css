@@ -311,6 +311,10 @@
   height: 100% !important;
 }
 .leaflet-tile { filter: brightness(0.85) contrast(1.05) saturate(0.6); }
+.sgs-satellite-tile .leaflet-tile { filter: none; }
+.sgs-dark-tile .leaflet-tile { filter: invert(1) hue-rotate(180deg) brightness(0.8) saturate(0.45); }
+.sgs-light-tile .leaflet-tile { filter: none; }
+.leaflet-container.sgs-light-map { background-color: #f1f3f4 !important; }
 
 .leaflet-popup-content-wrapper {
   background: rgba(28,35,44,0.88) !important;

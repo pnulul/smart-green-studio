@@ -7,6 +7,8 @@ import 'leaflet/dist/leaflet.css';
 import { AnalysisContext, DatasetMetadata, DatasetStyle, DatasetDiagnosticInfo } from '../../types';
 import { Maximize2, Layers, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { parseNumericDN, parseYearDN, normalizeEnvironmentalGrade } from '../../utils/dnParser';
+import { LIGHT_BASEMAP } from '../../config/maps';
+import { createBasemapLayer } from '../../utils/basemapLayer';
 
 interface ThematicAnalysisMapProps {
   dataset: DatasetMetadata;
@@ -38,6 +40,7 @@ export const ThematicAnalysisMap: React.FC<ThematicAnalysisMapProps> = ({
   const analysisZoneLayer = useRef<L.Layer | null>(null);
   const maskLayer = useRef<L.Polygon | null>(null);
   const [isRendered, setIsRendered] = useState(false);
+  const [rasterError, setRasterError] = useState('');
 
   const center: L.LatLngExpression = [context.target.lat, context.target.lng];
 
@@ -56,21 +59,34 @@ export const ThematicAnalysisMap: React.FC<ThematicAnalysisMapProps> = ({
         doubleClickZoom: false,
         touchZoom: false,
         boxZoom: false,
-        keyboard: false
+        keyboard: false,
+        preferCanvas: true,
       });
       mapInstance.current = map;
 
-      // Clean dark-adapted base map with low opacity to emphasize thematic data
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        crossOrigin: true,
-        maxZoom: 19,
-        opacity: 0.3,
-      }).addTo(map);
+      createBasemapLayer(LIGHT_BASEMAP.url, { ...LIGHT_BASEMAP.options, opacity: 0.85 }).addTo(map);
+      L.control.attribution({ prefix: false }).addTo(map);
 
       L.control.zoom({ position: 'bottomright' }).addTo(map);
     }
 
+    // A tab can mount while its sidebar is hidden. Refit after it becomes visible.
+    const resize = () => {
+      const map = mapInstance.current;
+      if (!map || !mapRef.current?.clientWidth || !mapRef.current.clientHeight) return;
+      map.invalidateSize({ pan: false });
+      const bounds = (analysisZoneLayer.current as L.FeatureGroup | L.Circle | null)?.getBounds();
+      if (bounds?.isValid()) map.fitBounds(bounds, { padding: [20, 20], animate: false });
+    };
+    const observer = new ResizeObserver(resize);
+    observer.observe(mapRef.current);
+    const frame = requestAnimationFrame(resize);
+    window.addEventListener('resize', resize);
+
     return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+      window.removeEventListener('resize', resize);
       if (mapInstance.current) {
         mapInstance.current.remove();
         mapInstance.current = null;
@@ -193,12 +209,15 @@ export const ThematicAnalysisMap: React.FC<ThematicAnalysisMapProps> = ({
         // ignore
       }
     }
-  }, [context.target.lat, context.target.lng, context.target.radius, context.target.shapeType]);
+  }, [context.target.lat, context.target.lng, context.target.radius, context.target.shapeType, context.target.geometry]);
 
 
   // Render raster if applicable
   useEffect(() => {
     if (!mapInstance.current) return;
+    const map = mapInstance.current;
+    setIsRendered(false);
+    setRasterError('');
     
     // Cleanup previous raster
     if (rasterLayerRef.current) {
@@ -206,7 +225,7 @@ export const ThematicAnalysisMap: React.FC<ThematicAnalysisMapProps> = ({
       rasterLayerRef.current = null;
     }
     
-    if (dataset.dataType !== 'raster' || !rasterPreview) {
+    if (dataset.dataType !== 'raster' || !rasterPreview?.blob || rasterPreview.isEmpty) {
       return;
     }
     
@@ -220,23 +239,31 @@ export const ThematicAnalysisMap: React.FC<ThematicAnalysisMapProps> = ({
       
       const overlay = L.imageOverlay(objectUrl, bounds, {
         opacity: style?.fillOpacity !== undefined ? style.fillOpacity : 0.75,
-        interactive: false
-      }).addTo(mapInstance.current);
+        interactive: false,
+        alt: `${dataset.nameKo} 분석 결과`,
+      });
+      overlay.once('load', () => {
+        setIsRendered(true);
+        onRendered?.();
+      });
+      overlay.once('error', () => setRasterError('분석 결과 이미지를 표시하지 못했습니다. 분석을 다시 실행해 주세요.'));
+      overlay.addTo(map);
       const img = overlay.getElement();
       if (img) {
         img.style.imageRendering = 'pixelated';
       }
       rasterLayerRef.current = overlay;
       
-      setIsRendered(true);
-      if (onRendered) onRendered();
-      
       return () => {
+        overlay.off();
+        if (map.hasLayer(overlay)) map.removeLayer(overlay);
+        if (rasterLayerRef.current === overlay) rasterLayerRef.current = null;
         URL.revokeObjectURL(objectUrl);
       };
       
     } catch (err) {
       console.error('Failed to render raster overlay', err);
+      setRasterError('분석 결과 이미지를 표시하지 못했습니다. 분석을 다시 실행해 주세요.');
     }
   }, [rasterPreview, style, dataset]);
 
@@ -509,7 +536,7 @@ export const ThematicAnalysisMap: React.FC<ThematicAnalysisMapProps> = ({
   return (
     <div className="flex flex-col space-y-4">
       <div className="relative w-full h-[420px] rounded-lg overflow-hidden border border-[var(--border-hair)] bg-[var(--surface-1)]">
-        <div ref={mapRef} className="w-full h-full" />
+        <div ref={mapRef} className="w-full h-full sgs-light-map" />
 
         {/* Badges and Quick Tools Overlay (Top Left) */}
         <div className="absolute top-3 left-3 z-[400] flex flex-wrap gap-2 items-center">
@@ -550,6 +577,7 @@ export const ThematicAnalysisMap: React.FC<ThematicAnalysisMapProps> = ({
         )}
       </div>
 
+      {rasterError && <p role="alert" className="text-xs text-[var(--warn)]">{rasterError}</p>}
       {/* Fallback notice if dataset empty */}
       {!hasData && (
         <div className="card p-4 text-center text-xs text-[var(--text-3)] bg-[var(--surface-1)] border border-[var(--border-hair)] rounded-lg">

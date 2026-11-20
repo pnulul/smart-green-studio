@@ -512,7 +512,6 @@ export default function App() {
               currentSite={currentSite}
               googleSearchApiKey={googleSearchApiKey}
               googleSearchEngineId={googleSearchEngineId}
-              onOpenApiSettings={() => setIsApiSettingsOpen(true)}
               onResultsChange={setNewsResults}
               session={authSession}
             />
