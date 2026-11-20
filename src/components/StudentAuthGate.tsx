@@ -3,7 +3,6 @@ import { ArrowRight, GraduationCap, Leaf, Lock } from 'lucide-react';
 import { StudentAuthSession } from '../types';
 import { PNU_COURSES } from '../config/courses';
 import { apiUrl } from '../services/resourceService';
-import { UsageSettings } from './UsageSettings';
 
 export { PNU_COURSES } from '../config/courses';
 
@@ -65,8 +64,6 @@ export const StudentAuthGate: React.FC<{ onLoginSuccess: (session: StudentAuthSe
             </form>
           </details>}
           {!config.demo && !config.courseLogin && <p>운영자에게 접속 설정을 확인해 주세요.</p>}
-          <a data-usage-action="vr" href="https://pnulul.github.io/vr/" target="_blank" rel="noopener noreferrer" className="mt-6 text-sm text-[var(--accent)] underline underline-offset-4">수목 관리 VR 실습 바로가기 ↗</a>
-          <UsageSettings />
         </section>
       </div>
     </main>
