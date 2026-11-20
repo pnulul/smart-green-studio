@@ -72,7 +72,7 @@ export const CenterMap: React.FC<CenterMapProps> = ({
 
   const [activeBaseLayer, setActiveBaseLayer] = useState<
     'dark' | 'voyager' | 'osm' | 'googleRoad' | 'googleSat' | 'terrain'
-  >('osm');
+  >('googleSat');
   const [showLayerPanel, setShowLayerPanel] = useState(false);
   const [showPoiDrawer, setShowPoiDrawer] = useState(false);
   const [selectedPoiCategory, setSelectedPoiCategory] = useState<string>('ALL');
@@ -150,8 +150,8 @@ export const CenterMap: React.FC<CenterMapProps> = ({
       terrain: layerTerrain,
     };
 
-    layerOsm.addTo(map);
-    setActiveBaseLayer('osm');
+    layerGoogleSat.addTo(map);
+    setActiveBaseLayer('googleSat');
 
     L.control
       .attribution({
