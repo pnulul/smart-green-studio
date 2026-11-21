@@ -16,10 +16,12 @@ test('configured news search works without personal keys, encodes Korean queries
   const service = client(async input => {
     count++;
     assert.equal(new URL(String(input)).searchParams.get('q'), '부산 공원 & 녹지');
-    return Response.json({ items: [{ title: '실제 기사', link: 'https://news.example/article', snippet: '공원 조성' }] });
+    return Response.json({ provider: 'NewsData.io', items: [{ title: '실제 기사', link: 'https://news.example/article', snippet: '공원 조성' }] });
   });
   assert.equal(service.isConfigured(), true);
-  assert.equal((await service.searchNews('부산 공원 & 녹지')).length, 1);
+  const items = await service.searchNews('부산 공원 & 녹지');
+  assert.equal(items.length, 1);
+  assert.equal(items[0].provider, 'NewsData.io');
   await service.searchNews('부산 공원 & 녹지');
   assert.equal(count, 1);
 });

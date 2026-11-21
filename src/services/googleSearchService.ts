@@ -4,6 +4,7 @@ export interface GoogleSearchItem {
   snippet: string;
   source?: string;
   publishedAt?: string;
+  provider?: string;
   pagemap?: {
     cse_thumbnail?: { src: string }[];
   };
@@ -51,7 +52,7 @@ export const googleSearchService = {
     const items = data.items.filter((item: GoogleSearchItem) => {
       if (typeof item?.title !== 'string' || typeof item.link !== 'string') return false;
       try { return ['https:', 'http:'].includes(new URL(item.link).protocol); } catch { return false; }
-    }).slice(0, 6) as GoogleSearchItem[];
+    }).slice(0, 6).map((item: GoogleSearchItem) => ({ ...item, provider: data.provider })) as GoogleSearchItem[];
     if (newsCache.size >= 50) newsCache.delete(newsCache.keys().next().value!);
     newsCache.set(cacheKey, { items, expires: Date.now() + 300000 });
     return items;

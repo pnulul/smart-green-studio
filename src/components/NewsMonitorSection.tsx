@@ -25,6 +25,7 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
   const [searchResults, setSearchResults] = useState<GoogleSearchItem[]>([]);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
+  const [submittedQuery, setSubmittedQuery] = useState('');
   const requestId = useRef(0);
   useEffect(() => {
     requestId.current++;
@@ -55,6 +56,7 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
 
     const currentRequest = ++requestId.current;
     setHasSearched(true);
+    setSubmittedQuery(query.trim());
     setIsSearching(true);
     const startTime = Date.now();
     loggerService.log(session?.studentId || 'unknown', 'NEWS_SEARCH', `검색어: ${query}`, {
@@ -132,7 +134,7 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
             </div>
             <input
               type="text"
-              maxLength={200}
+              maxLength={100}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -169,11 +171,20 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
         {searchError && (
           <div className="mb-8 p-4 rounded-xl border border-[var(--warn)] bg-[var(--warn)]/5 text-[var(--warn)] flex items-center gap-3">
             <AlertCircle className="w-5 h-5 flex-shrink-0" />
-            <p className="text-sm font-medium">{searchError}</p>
+            <div>
+              <p className="text-sm font-medium">{searchError}</p>
+              {submittedQuery && <a href={`https://news.google.com/search?${new URLSearchParams({ q: submittedQuery, hl: 'ko', gl: 'KR', ceid: 'KR:ko' })}`} target="_blank" rel="noreferrer" className="inline-block mt-2 text-xs underline">Google 뉴스에서 검색 결과 보기</a>}
+            </div>
           </div>
         )}
 
         {/* News Grid (Empty / Loading / Results) */}
+        {hasSearched && !isSearching && !searchError && searchResults.some(item => item.provider === 'NewsData.io') && (
+          <p className="text-xs text-[var(--text-3)] mb-3">
+            <a href="https://newsdata.io" target="_blank" rel="noreferrer" className="hover:text-[var(--accent)]">Powered by NewsData.io API</a>
+            {' · 무료 플랜: 최근 48시간 기사, 12시간 지연'}
+          </p>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           {!isSearching && searchResults.length === 0 && !searchError && (
             <div className="col-span-1 md:col-span-2 lg:col-span-3 py-12 flex flex-col items-center justify-center border border-dashed border-[var(--border-hair)] rounded-2xl bg-[var(--surface-1)]/50">
