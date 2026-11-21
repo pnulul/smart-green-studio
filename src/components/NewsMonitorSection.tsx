@@ -95,7 +95,9 @@ export const NewsMonitorSection: React.FC<NewsMonitorSectionProps> = ({
     const city = address.match(/([가-힣]+(?:특별자치시|특별시|광역시|도|시))/)?.[1]?.replace(/(특별자치시|특별시|광역시)$/, '') || '';
     const district = address.match(/(?:^|\s)([가-힣]+(?:구|군))(?=\s|$)/)?.[1] || '';
     const location = [city, district].filter(Boolean).join(' ') || currentSite.siteName;
-    const q = `${location} ${keyword.replace(/·/g, ' ')}`;
+    const terms = keyword.split('·');
+    const topic = terms.length > 1 ? `(${terms.join(' OR ')})` : keyword;
+    const q = `${location} ${topic}`;
     setSearchQuery(q);
     handleSearch(q);
   };
